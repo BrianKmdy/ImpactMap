@@ -75,6 +75,8 @@ if(isset($_POST['btn-login']))
 			<div class="clearfix"></div><hr />
 
 			<label>Don't have an account? <a href="register.php">Sign Up</a></label>
+			<label>Forgot Password? <a href="forgot_password.php">Click Here</a></label>
+
 			
 		</form>
 	</div>
