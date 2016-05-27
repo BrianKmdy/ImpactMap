@@ -1,5 +1,6 @@
 <?php
 
+require_once "../common/dbConnect.php";
 require_once "../common/class.map.php";
 $map = new Map();
 
@@ -18,3 +19,5 @@ $filters = array(
 
 $result = $map -> load_projects($filters);
 echo json_encode($result);
+
+?>

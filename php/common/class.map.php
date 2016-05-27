@@ -861,19 +861,37 @@ class Map {
 
         $results = NULL;
         $sql = "SELECT pid, lat, lng, title FROM Projects WHERE visible = true AND
-                  cid = ISNULL(:cid, cid) AND type = ISNULL(:type, type) AND status = ISNULL(:status, status) AND
+                  cid >= :cid_low AND cid <= :cid_hi AND
+                  status >= :status_low AND status <= :status_hi AND
+                  type >= :type_low AND type <= :type_hi AND
                   startDate>=:start AND endDate<=:end";
         try {
-            $cid = ($filters['center'] == -1) ? NULL : intval($filters['center']);
-            $type = ($filters['type'] == -1) ? NULL : intval($filters['type']);
-            $status = ($filters['status'] == -1) ? NULL : intval($filters['status']);
+            if ($filters['center'] == -1) {
+                $cid_low = -1;
+                $cid_hi = 99999;
+            } else
+                $cid_low = $cid_hi = intval($filters['center']);
+            if ($filters['status'] == -1) {
+                $status_low = -1;
+                $status_hi = 99999;
+            } else
+                $status_low = $status_hi = intval($filters['status']);
+            if ($filters['type'] == -1) {
+                $type_low = -1;
+                $type_hi = 99999;
+            } else
+                $type_low = $type_hi = intval($filters['type']);
+
             $start = empty($filters['start']) ? '1900-01-01' : date('Y-m-d', strtotime($filters['end']));
             $end = empty($filters['end']) ? date('Y-m-d') : date('Y-m-d', strtotime($filters['end']));
 
             $stmt = $this->_db->prepare($sql);
-            $stmt -> bindParam(":cid", $cid, PDO::PARAM_INT);
-            $stmt -> bindParam(":type", $type, PDO::PARAM_INT);
-            $stmt -> bindParam(":status", $status, PDO::PARAM_INT);
+            $stmt -> bindParam(":cid_low", $cid_low, PDO::PARAM_INT);
+            $stmt -> bindParam(":cid_hi", $cid_hi, PDO::PARAM_INT);
+            $stmt -> bindParam(":status_low", $status_low, PDO::PARAM_INT);
+            $stmt -> bindParam(":status_hi", $status_hi, PDO::PARAM_INT);
+            $stmt -> bindParam(":type_low", $type_low, PDO::PARAM_INT);
+            $stmt -> bindParam(":type_hi", $type_hi, PDO::PARAM_INT);
             $stmt -> bindParam(":start", $start, PDO::PARAM_STR);
             $stmt -> bindParam(":end", $end, PDO::PARAM_STR);
             $stmt -> execute();
