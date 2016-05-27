@@ -67,6 +67,55 @@ class Map {
         }
   }
 
+/**
+  * Update user info
+  *
+  */
+  public function update_userinfo($uid, $email2, $phone, $password) {
+    
+   $sql = "UPDATE Users SET
+              email = :email2,
+              phone = :phone,
+              password = :password
+            WHERE uid = :uid LIMIT 1
+            ";
+    try {
+        $stmt = $this->_db->prepare($sql);
+        $stmt -> bindParam(":uid", $uid, PDO::PARAM_INT);
+        $stmt -> bindParam(":email2",  $email2, PDO::PARAM_STR);
+        $stmt -> bindParam(":phone", $phone, PDO::PARAM_STR);
+        $stmt -> bindParam(":password", $password, PDO::PARAM_STR);
+        $stmt -> execute();
+        return TRUE;
+    } catch(PDOException $e) {
+        echo $e -> getMessage();
+        return FALSE;
+      }
+  }
+
+
+/**
+  * Reset a user's forgotten password
+  *
+  */
+  public function change_password($email, $newpassword) {
+    
+    $sql = "UPDATE Users SET
+              password = :newpass
+            WHERE email = :email LIMIT 1
+            ";
+    try {
+        $stmt = $this->_db->prepare($sql);
+        $stmt -> bindParam(":newpass", $newpassword, PDO::PARAM_STR);
+        $stmt -> bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt -> execute();
+        return $stmt -> fetch();
+    } catch(PDOException $e) {
+        echo $e -> getMessage();
+        return FALSE;
+    }
+  }
+
 
   /**
   * Return a list of all the projects found in the database
