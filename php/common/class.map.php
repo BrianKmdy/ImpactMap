@@ -67,6 +67,47 @@ class Map {
         }
   }
 
+  public function authenticate($uid) {
+    $sql = "UPDATE Users SET authenticated = TRUE WHERE uid = :uid";
+    try {
+        $stmt = $this->_db->prepare($sql);
+        $stmt -> bindParam(":uid", $uid, PDO::PARAM_INT);
+        $stmt -> execute();
+        return TRUE;
+    } catch(PDOException $e) {
+        echo $e -> getMessage();
+        return FALSE;
+    }
+  }
+
+  public function promote($uid) {
+    $sql = 'UPDATE Users SET root = TRUE WHERE uid = :uid';
+    try {
+      // First of all, let's begin a transaction
+      //$this->_db->beginTransaction();
+
+      $stmt = $this->_db->prepare($sql);
+      $stmt -> bindParam(":uid", $uid, PDO::PARAM_INT);
+      if ($stmt -> execute()) {
+        $sql =  'UPDATE Users SET root = FALSE WHERE uid != :uid';
+        $stmt = $this->_db->prepare($sql);
+        $stmt -> bindParam(":uid", $uid, PDO::PARAM_INT);
+        $stmt -> execute();
+        return TRUE;
+      }
+
+      // If we arrive here, it means that no exception was thrown
+      // i.e. no query has failed, and we can commit the transaction
+      //$this->_db->commit();
+      return FALSE;
+    } catch (Exception $e) {
+        // An exception has been thrown
+        // We must rollback the transaction
+        //$this->_db->rollback();
+        return FALSE;
+    }
+  }
+
     /**
     * Load all projects that meet the filter requirements. 
     *

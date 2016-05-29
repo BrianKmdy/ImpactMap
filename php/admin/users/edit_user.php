@@ -30,7 +30,7 @@
                 echo '<br>';
                 echo '<div class="span7 text-center">';
                 if ($user['authenticated'] == TRUE) {
-                    echo '<button type="button" class="btn btn-warning" data-dismiss="modal" onclick="promoteUser(' . $uid . ')">Promote to admin</button>';
+                    echo '<button type="button" class="btn btn-warning" onclick="warnPromotion(' . $uid . ')">Promote to admin</button>';
                 } else {
                     echo '<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="authenticateUser(' . $uid . ')">Authenticate user</button>';
                 }

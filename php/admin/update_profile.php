@@ -1,3 +1,12 @@
+<?php 
+    require_once "../common/class.map.php";
+
+    session_start();
+    
+    $map = new Map();
+    $row = $map -> login_user($_SESSION['user_email']);
+?>
+
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -5,8 +14,8 @@
             <h4 class="modal-title">User profile</h4>
         </div>
         <div class="modal-body">
-            <label>Email: </label><input type="text" class="form-control" id="email" name="email">
-            <label>Phone: </label><input type="text" class="form-control" id="phone" name="phone">
+            <label>Email: </label><input type="text" class="form-control" id="email" name="email" value=<?php echo '"' . $row['email'] . '"'; ?>>
+            <label>Phone: </label><input type="text" class="form-control" id="phone" name="phone" value=<?php echo '"' . $row['phone'] . '"'; ?>>
             <br>
             <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#password">Change password</button>
 
@@ -19,7 +28,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="submitPassword()" data-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="submitUpdateProfile()" data-dismiss="modal">Save changes</button>
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

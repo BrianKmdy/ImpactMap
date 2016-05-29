@@ -11,7 +11,7 @@
 							<li><a href="#" onclick="selectAll()">Select all</a></li>
 							<li><a href="#" onclick="unselectAll()">Unselect all</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#" onclick="deleteCenters()">Delete</a></li>
+							<li><a href="#" onclick="warnCenters()">Delete</a></li>
 						</ul>
 					</div>
 				</th>

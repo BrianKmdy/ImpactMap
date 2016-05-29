@@ -369,6 +369,66 @@ function updateProjects(func) {
     });
 }
 
+function warnProjects() {
+    $.ajax({
+        type: "POST",
+        url: "php/admin/warning.php",
+        data: {title: "Delete projects",
+               body: "Are you sure you wish to delete the selected projects?",
+               func: "updateProjects('delete')",
+               button: "Delete"}, 
+        success: popupCallback
+    });
+}
+
+function warnCenters() {
+    $.ajax({
+        type: "POST",
+        url: "php/admin/warning.php",
+        data: {title: "Delete centers",
+               body: "Are you sure you wish to delete the selected centers?",
+               func: "deleteCenters()",
+               button: "Delete"}, 
+        success: popupCallback
+    });
+}
+
+function warnContacts() {
+    $.ajax({
+        type: "POST",
+        url: "php/admin/warning.php",
+        data: {title: "Delete contacts",
+               body: "Are you sure you wish to delete the selected contacts?",
+               func: "deleteContacts()",
+               button: "Delete"}, 
+        success: popupCallback
+    });
+}
+
+function warnUsers() {
+    $.ajax({
+        type: "POST",
+        url: "php/admin/warning.php",
+        data: {title: "Delete users",
+               body: "Are you sure you wish to delete the selected users?",
+               func: "deleteUsers()",
+               button: "Delete"}, 
+        success: popupCallback
+    });
+}
+
+function warnPromotion(uid) {
+    $.ajax({
+        type: "POST",
+        url: "php/admin/warning.php",
+        data: {title: "Promote to admin",
+               body: "<h4>Are you sure you wish to promote this user to admin?</h4>Once a user is promoted they will replace you as admin and you will lose your power",
+               func: "promoteUser(" + uid + ")",
+               button: "Proceed"}, 
+        success: popupCallback
+    });
+}
+
 function selectAll() {
     $('#content input:checkbox').each(function () {
         $(this).prop('checked', true);
@@ -749,6 +809,29 @@ function loadProfile() {
         success: contentCallback
     });
 }
+
+function authenticateUser(uid) {
+    $.ajax({
+        type: "POST",
+        data: {authenticate: true,
+               uid: uid}, 
+        url: "php/admin/users/submit_user_edit.php",
+        success: loadUsers
+    });
+}
+
+function promoteUser(uid) {
+    $.ajax({
+        type: "POST",
+        data: {promote: true,
+               uid: uid}, 
+        url: "php/admin/users/submit_user_edit.php",
+        success: function (data) {
+            window.location.href = "/admin.php";
+        }
+    });
+}
+
 
 /**
 * Print any callback data passed after an ajax call

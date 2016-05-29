@@ -14,7 +14,7 @@
 							<li><a href="#" onclick="updateProjects('hide')">Hide</a></li>
 							<li><a href="#" onclick="updateProjects('show')">Show</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#" onclick="updateProjects('delete')">Delete</a></li>
+							<li><a href="#" onclick="warnProjects()">Delete</a></li>
 						</ul>
 					</div>
 				</th>

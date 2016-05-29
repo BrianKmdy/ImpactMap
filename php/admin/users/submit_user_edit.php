@@ -8,13 +8,12 @@
 
 	$map = new Map();
 
-	if (isset($_POST['uid'], $_POST['cas'], $_POST['admin'])) {
-		if (intval($_POST['uid']) == -1) {
-			$map -> add_user();
-			echo "Databse updated";
-		} else {
-		    $map -> update_user();
-		    echo "Databse updated";
+	if (isset($_POST['uid'])) {
+		if (isset($_POST['authenticate'])) 
+			$map->authenticate(intval($_POST['uid']));
+		else if (isset($_POST['promote'])) {
+			echo $_POST['uid'];
+			$map->promote(intval($_POST['uid']));
 		}
 	}
 ?>
