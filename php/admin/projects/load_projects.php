@@ -7,14 +7,19 @@
 	require_once "../../common/class.map.php";
 
 	$map = new Map();
-	$filters = array();
 
-	if (isset($_POST['limit']))             $filters['limit'] = intval($_POST['limit']);
-	if (isset($_POST['minLat']))            $filters['minLat'] = floatval($_POST['minLat']);
-	if (isset($_POST['maxLat']))            $filters['maxLat'] = floatval($_POST['maxLat']);
-	if (isset($_POST['minLng']))            $filters['minLng'] = floatval($_POST['minLng']);
-	if (isset($_POST['maxLng']))            $filters['maxLng'] = floatval($_POST['maxLng']);
-	if (isset($_POST['category']))          $filters['category'] = trim($_POST['category']);
+	$center = isset($_POST['center']) ? intval($_POST['center']) : -1;
+	$type = isset($_POST['type']) ? intval($_POST['type']) : -1;
+	$status = isset($_POST['status']) ? intval($_POST['status']) : -1;
+	$start = isset($_POST['start']) ? intval($_POST['start']) : "";
+	$end = isset($_POST['end']) ? intval($_POST['end']) : "";
+	$filters = array(
+		'center' => $center,
+		'type' => $type,
+		'status' => $status,
+		'start' => $start,
+		'end' => $end
+	);
 
 	$filtered = $map -> load_projects($filters);
 

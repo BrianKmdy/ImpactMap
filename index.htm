@@ -156,7 +156,7 @@
 
 </div>
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="filter-modal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -167,8 +167,8 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Centers:</label>
-                        <select class="form-control form-control-lg">
-                            <option selected>Names of Centers</option>
+                        <select class="form-control form-control-lg" id="centers" name="centers">
+                            <option value="-1">All</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -191,33 +191,37 @@
                         <input type="text" class="form-control" id="recipient-name">
                             </div>
                     <div class="form-group">
-                        <label for="project-name" class="control-label">Projects:</label>
-                        <select class="form-control form-control-lg">
-                            <option selected>Names of Projects</option>
+                        <label for="project-type" class="control-label">Project Type:</label>
+                        <select class="form-control form-control-lg" id="project-type" name="project-type">
+                            <option value="-1">All</option>
+                            <option value="0">Zero</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                     </div>
-                    
-                    
-                    
-                    
+
                     <div class="form-group">
                     	<div class="input-daterange input-group" id="datepicker">
-                              <input type="text" class="input-sm form-control" name="start" />
-                         <span class="input-group-addon">to</span>
-                         <input type="text" class="input-sm form-control" name="end" />
-	</div>
-
-
+                            <input type="text" class="input-sm form-control" name="start-date" id="start-date" />
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="input-sm form-control" name="end-date" id="end-date"/>
+	                    </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="project-status" class="control-label">Project Status:</label>
+                        <select class="form-control form-control-lg" id="project-status" name="project-status">
+                            <option value="-1">All</option>
+                            <option value="0">Planned</option>
+                            <option value="1">Ongoing</option>
+                            <option value="2">Completed</option>
+                        </select>
+                    </div>
                     
-                    
-                    
+                    <!--
                     <div class= "form-group">
-                        <label for="status-name" class="control-label">Project Status:</label>
+                        <label class="control-label">Project Status:</label>
                         
                         <div class="radio">
                             <label>
@@ -235,6 +239,7 @@
                         </div>
                         
                     </div>
+                    -->
                     
                 </form>
                 
@@ -245,7 +250,7 @@
             <div class="modal-footer">
                 
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button"  class="btn btn-primary" data-toggle= "collapse" data-target="#exCollapsingNavbar" data-dismiss="modal">Search</button>
+                <button type="button" class="btn btn-primary" data-toggle= "collapse" data-target="#exCollapsingNavbar" data-dismiss="modal" id="filter-button">Search</button>
             </div>
             
             

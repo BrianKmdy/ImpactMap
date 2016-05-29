@@ -67,7 +67,17 @@
                 echo '<label>Results: </label><textarea class="form-control" id="results"  name="results" rows="10">' . $project['results'] . '</textarea>';
                 echo '</div>';
                 echo '<label>Link: </label><input type="text" class="form-control" id="link" name="link" value="' . $project['link'] . '">';
-                echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $project['pic'] . '">';
+                echo '<div class="form-group" id="pictureGroup">';
+
+                if (!empty($project['pic'])) {      //There is already a picture associated with this project
+                    echo '<a class="btn btn-primary" target="_blank" href="' . $project['pic'] . '">View Picture</a>';
+                    echo '<a class="btn btn-primary" href="delete_picture.php?pid=' . $pid . '">Delete Picture</a>';
+                }
+                echo '<label>Picture upload: </label><input type="file" class="form-control-file" id="pic" name="pic">';
+
+                echo '</div>';
+                //echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $project['pic'] . '">';
+
                 echo '<label>Contact: </label><select type="text" class="form-control" id="conid" name="conid">';
                 $contacts = $map->load_contacts();
                 for ($i = 0; $i < count($contacts); $i++) {

@@ -60,7 +60,56 @@ $(document).ready(function () {
         });
     }
   });
+
+    $('#filter-button').click(function (event) {
+        event.preventDefault();                         //Prevents button default event
+        var projectCenter = $('#centers').val();        //Default: -1 (all)
+        var projectType = $('#project-type').val();     //Default: -1 (all)
+        var projectStatus = $("#project-status").val(); //Default: -1 (all)
+        var startDate = $('#start-date').val();         //Default: empty (all)
+        var endDate = $('#end-date').val();             //Default: empty (all)
+
+        $.ajax ({
+            type: 'POST',
+            url: '../php/map/filter.php',
+            data: {
+                center: projectCenter,
+                type: projectType,
+                status: projectStatus,
+                start: startDate,
+                end: endDate
+            },
+            dataType: json,
+            success: function(data) {
+                //Do stuff here... data is JSON with keys: 'pid', 'title', 'lat', 'lng'
+
+            },
+            complete: function() {
+                $('#filter-modal').hide();          //Close the filter modal after code runs
+            }
+        });
+    });
 });
+
+//Shows lightbox, call this function when map marker is clicked. Parameters is the project ID
+function lightboxPopup(pid) {
+    $.ajax ({
+        type: 'POST',
+        url: '../php/map/get_project.php',
+        data: {
+            pid: pid
+        },
+        dataType: json,
+        success: function(data) {
+            //Do stuff here... data is in JSON with same column names as Projects table
+
+        },
+        complete: function() {
+
+        }
+    })
+}
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
