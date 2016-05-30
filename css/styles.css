@@ -33,6 +33,15 @@ html, body {
 	font-family: 'futura', sans-serif;
 }
 
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+	text-decoration: none;
+    color: white;
+}
+
+.mdl-layout__header-row .mdl-navigation__link {
+    padding: 0 24px 8px;
+}
+
 .mdl-layout__header .mdl-layout__drawer-button {
 	background-color: #404040;
 }
@@ -47,6 +56,27 @@ html, body {
 	font-size: 2em;
 }
 
+.mdl-layout__drawer {
+    border-right: 0;
+    background: #404040;
+		color: white;
+		opacity: 0.9;
+		z-index: 2;
+}
+
+.mdl-layout__drawer a {
+		color: white;
+}
+
+.mdl-layout__obfuscator {
+    z-index: 1;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover {
+    background-color: white;
+    color: black;
+}
+
 /* Bottom navigation bar */
 .navbar {
 	padding: 0.1%;
@@ -57,7 +87,7 @@ html, body {
 	line-height: 1.42857143 !important;
 	background-color: #404040;
 	border-radius: 0;
-	box-shadow: 0 2px 15px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 -2px 2px 0 rgba(0,0,0,.14),0 -4px 1px -2px rgba(0,0,0,.2),0 -1px 5px 0 rgba(0,0,0,.12)
 }
 
 .navbar-fixed-bottom {
@@ -110,6 +140,7 @@ html, body {
 }
 
 #lb {
+	overflow: auto;
 	top: 12.5%;
 	left: 7.5%;
 	height: 75%;
@@ -157,10 +188,7 @@ html, body {
 
 /* UC Davis image top-right */
 #banner {
-	padding: 10%;
-	font-size: 2em;
-	width: 10%;
-	height: 95.97px;
+	width: 18%;
 	min-width: 8em;
 }
 
