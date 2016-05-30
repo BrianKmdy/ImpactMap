@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
     /**
     * The contents of the popup dialog for viewing a project in the History table. Nothing can be edited from here, only viewed.
