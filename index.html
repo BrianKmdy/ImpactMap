@@ -68,7 +68,7 @@
         <div class="mdl-layout__drawer">
             <span style="font-size: 1.5em; margin-top: 80px;" class="mdl-layout-title">About</span>
             <nav class="mdl-navigation">
-                <a id="title" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Filters</a>
+                <a id="mobile-filter" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Filters</a>
                 <a class="mdl-navigation__link" href="">Energy Efficiency Center</a>
                 <a class="mdl-navigation__link" href="">Center for Water Energy Efficiency</a>
                 <a class="mdl-navigation__link" href="">California Lighting Technology Center</a>
@@ -82,43 +82,42 @@
 
             <!-- Lightbox elements -->
             <div id="lbBackground" onclick="dismissLB()"></div> <!-- Greyed out lightbox background -->
+            
+
+            
             <div id="lb"> <!-- Actual lightbox box -->
-                <div id="lbL3">
-                    <ul class="lbList">
-                        <li> Center </li>
+                        <div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--4-col"><ul class="lbList">
+                        <li> <b>Center</b> </li>
                         <br>
-                        <li> Project </li>
+                        <li> <b>Project</b> </li>
                         <br>
-                        <li> Date </li>
+                        <li> <b>Date</b> </li>
                         <br>
-                        <li> Location </li>
+                        <li> <b>Location</b> </li>
                         <br>
                         <li>
-                            Summary
+                            <b>Summary</b>
                             <p> Lorem ipsum dolor sit amet, urna pulvinar, posuere dui sit urna condimentum. Libero dolor non praesent quisque varius vitae. Congue maecenas malesuada, id ut pede maecenas ante phasellus eu, velit eros, sem eu eros duis phasellus. Sit lectus volutpat, elit habitasse aliquam pede ante vel, elit leo est vel porttitor, sem sem neque.<p>
                         </li>
                         <br>
-                    </ul>
-                </div>
-                <div id="lbM3">
-                    <ul class="lbList">
-                        <li> Results </li>
+                    </ul></div>
+  <div class="mdl-cell mdl-cell--4-col"><ul class="lbList">
+                        <li> <b>Results</b> </li>
                         <br>
                         <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                         <p>
-                    </ul>
-                </div>
-                <div id="lbR3">
-                    <ul class="lbList">
-                        <li> Learn More </li>
+                    </ul></div>
+  <div class="mdl-cell mdl-cell--4-col">                    <ul class="lbList">
+                        <li> <b>Learn More</b> </li>
                         <br>
-                        <li> Contact </li>
+                        <li> <b>Contact</b> </li>
                         <br>
-                        <li> Funded by: </li>
+                        <li> <b>Funded by:</b> </li>
                         <br>
                     </ul>
-                </div>
-            </div>
+                </div></div>
+</div>
 
             <!-- Filter modal pop-up -->
             <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
