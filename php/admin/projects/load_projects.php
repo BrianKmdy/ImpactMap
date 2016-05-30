@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
 	/**
 	* Called to load all the projects that meet the specified filters. Results are returned as a json encoded array

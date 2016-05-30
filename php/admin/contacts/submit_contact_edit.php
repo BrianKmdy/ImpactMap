@@ -1,3 +1,9 @@
+<?php 
+
+    require_once "check_authenticated.php";   
+
+?>
+
 <?php
 
 	/**

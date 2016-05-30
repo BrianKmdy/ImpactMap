@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
 	/**
 	* Called with an array of center IDs, each center is then deleted from the center table
