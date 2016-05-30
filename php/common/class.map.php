@@ -84,20 +84,18 @@ class Map {
   * Update user info
   *
   */
-  public function update_userinfo($uid, $email2, $phone, $password) {
+  public function update_profile($oldEmail, $newEmail, $phone) {
     
    $sql = "UPDATE Users SET
-              email = :email2,
-              phone = :phone,
-              password = :password
-            WHERE uid = :uid LIMIT 1
+              email = :newEmail,
+              phone = :phone
+            WHERE email = :oldEmail LIMIT 1
             ";
     try {
         $stmt = $this->_db->prepare($sql);
-        $stmt -> bindParam(":uid", $uid, PDO::PARAM_INT);
-        $stmt -> bindParam(":email2",  $email2, PDO::PARAM_STR);
+        $stmt -> bindParam(":newEmail",  $newEmail, PDO::PARAM_STR);
+        $stmt -> bindParam(":oldEmail", $oldEmail, PDO::PARAM_STR);
         $stmt -> bindParam(":phone", $phone, PDO::PARAM_STR);
-        $stmt -> bindParam(":password", $password, PDO::PARAM_STR);
         $stmt -> execute();
         return TRUE;
     } catch(PDOException $e) {
@@ -139,15 +137,15 @@ class Map {
   * Reset a user's forgotten password
   *
   */
-  public function change_password($email, $newpassword) {
+  public function change_password($email, $newPassword) {
     
     $sql = "UPDATE Users SET
-              password = :newpass
+              password = :newPassword
             WHERE email = :email LIMIT 1
             ";
     try {
         $stmt = $this->_db->prepare($sql);
-        $stmt -> bindParam(":newpass", $newpassword, PDO::PARAM_STR);
+        $stmt -> bindParam(":newPassword", $newPassword, PDO::PARAM_STR);
         $stmt -> bindParam(":email", $email, PDO::PARAM_STR);
         $stmt -> execute();
         return $stmt -> fetch();
