@@ -1,3 +1,9 @@
+<?php 
+
+    require_once "check_authenticated.php"; 
+
+?>
+
 <?php
 	/**
 	* Submit changes to a user's properties to the database. User attributes are sent over via POST
