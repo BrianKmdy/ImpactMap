@@ -6,233 +6,232 @@
 <!--<![endif]-->
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<!-- Info tags -->
-	<meta name="description" content="UC Davis Impact Map">
-	<meta name="author" content="UC Davis">
-	<link rel="icon" href="">
-	<title>Impact Map</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Info tags -->
+    <meta name="description" content="UC Davis Impact Map">
+    <meta name="author" content="UC Davis">
+    <link rel="icon" href="">
+    <title>Impact Map</title>
 
-	<!-- External files -->
-	<!-- Jquery 2.2.4 -->
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- External files -->
+    <!-- Jquery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
-	<!-- Material Design Icons -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-	<!-- Material Design Template -->
-	<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-	<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <!-- Material Design Template -->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
-	<!-- Bootstrap 3.3.6 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-	<!-- Other -->
-	<link rel="stylesheet" type="text/css" href="./lib/typeahead/typeaheadjs.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/bloodhound.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.bundle.js"></script>
-	<script scrc="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.jquery.js"></script>
-	<script src="./lib/snowball_stemmer/Snowball.min.js"></script>
+    <!-- Other -->
+    <link rel="stylesheet" type="text/css" href="./lib/typeahead/typeaheadjs.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/bloodhound.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.bundle.js"></script>
+    <script scrc="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.jquery.js"></script>
+    <script src="./lib/snowball_stemmer/Snowball.min.js"></script>
 
-	<!-- Main local files (css) (js) (json) -->
-	<script src="./json/data.json"></script>
-	<script type="text/javascript" src="./lib/markerclusterer.js"></script>
-	<script type="text/javascript" src="./js/map.js"></script>
-	<link rel="stylesheet" type="text/css" href="./css/styles.css">
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	  <![endif]-->
+    <!-- Main local files (css) (js) (json) -->
+    <script src="./json/data.json"></script>
+    <script type="text/javascript" src="./lib/markerclusterer.js"></script>
+    <script type="text/javascript" src="./js/map.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 </head>
 
 <body>
 
-	<!-- Always shows a header, even in smaller screens. -->
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<header class="mdl-layout__header">
-			<div class="mdl-layout__header-row">
-				<!-- Title -->
-				<span class="mdl-layout-title">IMPACT MAP</span>
-									<span><a id="title" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="material-icons">&#xE152;</i></a></span>
-				<!-- Add spacer, to align navigation to the right -->
-				<div class="mdl-layout-spacer"></div>
-				<!-- Navigation. We hide it in small screens. -->
-			
-								<img id="banner" src="./UCD_LOGO/ucdavis_logo_white.png">
-			</div>
-		</header>
-		<div class="mdl-layout__drawer">
-			<span style="font-size: 1.5em; margin-top: 80px;" class="mdl-layout-title">About</span>
-			<nav class="mdl-navigation">
-				<a id="title" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Filters</a>
-				<a class="mdl-navigation__link" href="">Energy Efficiency Center</a>
-				<a class="mdl-navigation__link" href="">Center for Water Energy Efficiency</a>
-				<a class="mdl-navigation__link" href="">California Lighting Technology Center</a>
-				<a class="mdl-navigation__link" href="">Plug-in Hybrid Vehicle</a>
-			</nav> <!-- Sidebar Menu Items -->
-		</div> <!-- Sidebar -->
-		<main class="mdl-layout__content">
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">IMPACT MAP</span>
+                <span><a id="filter-icon" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="material-icons">&#xE152;</i></a></span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <img id="banner" src="./UCD_LOGO/ucdavis_logo_white.png">
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span style="font-size: 1.5em; margin-top: 80px;" class="mdl-layout-title">About</span>
+            <nav class="mdl-navigation">
+                <a id="title" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Filters</a>
+                <a class="mdl-navigation__link" href="">Energy Efficiency Center</a>
+                <a class="mdl-navigation__link" href="">Center for Water Energy Efficiency</a>
+                <a class="mdl-navigation__link" href="">California Lighting Technology Center</a>
+                <a class="mdl-navigation__link" href="">Plug-in Hybrid Vehicle</a>
+            </nav> <!-- Sidebar Menu Items -->
+        </div> <!-- Sidebar -->
+        <main class="mdl-layout__content">
 
-			<div id="map"></div>
-			<!-- Google map -->
-			<!-- Lightbox elements -->
-			<div id="lbBackground" onclick="dismissLB()"></div>
-			<div id="lb">
-				<div id="lbL3">
-					<ul class="lbList">
-						<li> Center </li>
-						<br>
-						<li> Project </li>
-						<br>
-						<li> Date </li>
-						<br>
-						<li> Location </li>
-						<br>
-						<li>
-							Summary
-							<p> Lorem ipsum dolor sit amet, urna pulvinar, posuere dui sit urna condimentum. Libero dolor non praesent quisque varius vitae. Congue maecenas malesuada, id ut pede maecenas ante phasellus eu, velit eros, sem eu eros duis phasellus. Sit lectus volutpat, elit habitasse aliquam pede ante vel, elit leo est vel porttitor, sem sem neque.<p>
-						</li>
-						<br>
-					</ul>
-				</div>
-				<div id="lbM3">
-					<ul class="lbList">
-						<li> Results </li>
-						<br>
-						<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-						<p>
-					</ul>
-				</div>
+            <!-- Google map -->
+            <div id="map"></div>
 
-				<div id="lbR3">
-					<ul class="lbList">
-						<li> Learn More </li>
-						<br>
-						<li> Contact </li>
-						<br>
-						<li> Funded by: </li>
-						<br>
-					</ul>
-				</div>
-			</div>
+            <!-- Lightbox elements -->
+            <div id="lbBackground" onclick="dismissLB()"></div> <!-- Greyed out lightbox background -->
+            <div id="lb"> <!-- Actual lightbox box -->
+                <div id="lbL3">
+                    <ul class="lbList">
+                        <li> Center </li>
+                        <br>
+                        <li> Project </li>
+                        <br>
+                        <li> Date </li>
+                        <br>
+                        <li> Location </li>
+                        <br>
+                        <li>
+                            Summary
+                            <p> Lorem ipsum dolor sit amet, urna pulvinar, posuere dui sit urna condimentum. Libero dolor non praesent quisque varius vitae. Congue maecenas malesuada, id ut pede maecenas ante phasellus eu, velit eros, sem eu eros duis phasellus. Sit lectus volutpat, elit habitasse aliquam pede ante vel, elit leo est vel porttitor, sem sem neque.<p>
+                        </li>
+                        <br>
+                    </ul>
+                </div>
+                <div id="lbM3">
+                    <ul class="lbList">
+                        <li> Results </li>
+                        <br>
+                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        <p>
+                    </ul>
+                </div>
+                <div id="lbR3">
+                    <ul class="lbList">
+                        <li> Learn More </li>
+                        <br>
+                        <li> Contact </li>
+                        <br>
+                        <li> Funded by: </li>
+                        <br>
+                    </ul>
+                </div>
+            </div>
 
-			<!-- Filter modal pop-up -->
-			<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="exampleModalLabel">Filters</h4>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<label for="recipient-name" class="control-label">Centers:</label>
-									<select class="form-control form-control-lg">
-										<option selected>Names of Centers</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
-									<input type="text" class="form-control" id="recipient-name">
-								</div>
-								<div class="form-group">
-									<label for="project-name" class="control-label">Projects:</label>
-									<select class="form-control form-control-lg">
-										<option selected>Names of Projects</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<div class="input-daterange input-group" id="datepicker">
-										<input type="text" class="input-sm form-control" name="start" />
-										<span class="input-group-addon">to</span>
-										<input type="text" class="input-sm form-control" name="end" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="status-name" class="control-label">Project Status:</label>
-									<div class="radio">
-										<label>
-											<input type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>Completed
-										</label>
-									</div>
-									<div class="radio">
-										<label>
-											<input type="radio" name="exampleRadios" id="exampleRadios2" value="option2">Ongoing
-										</label>
-									</div>
-									<div class="radio">
-										<label>
-											<input type="radio" name="exampleRadios" id="exampleRadios3" value="option3">Anticipated
-										</label>
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#exCollapsingNavbar" data-dismiss="modal" id="filter-button">Search</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end of modal -->
-			<!-- Search box-->
-			<div id="search">
-				<form>
-					<input id="searchbar" type="text" name="search" placeholder="Search">
-				</form>
-			</div>
+            <!-- Filter modal pop-up -->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">Filters</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="control-label">Centers:</label>
+                                    <select class="form-control form-control-lg">
+                                        <option selected>Names of Centers</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="project-name" class="control-label">Projects:</label>
+                                    <select class="form-control form-control-lg">
+                                        <option selected>Names of Projects</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class="input-sm form-control" name="start" />
+                                        <span class="input-group-addon">to</span>
+                                        <input type="text" class="input-sm form-control" name="end" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status-name" class="control-label">Project Status:</label>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>Completed
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="exampleRadios" id="exampleRadios2" value="option2">Ongoing
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="exampleRadios" id="exampleRadios3" value="option3">Anticipated
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#exCollapsingNavbar" data-dismiss="modal" id="filter-button">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end of modal -->
 
-			<!-- Navbar fixed bottom -->
-			<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#"># of Markers Visible</a>
-					</div>
-					<div class="navbar-collapse collapse">
-						<!-- Left nav -->
-						<ul class="nav navbar-nav">
-							<li><a href="#">Link</a></li>
-						</ul>
-						<!-- Right nav -->
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#">Center</a></li>
-						</ul>
-					</div>
-					<!--/.nav-collapse -->
-				</div>
-				<!--/.container -->
-			</div>
-			<!-- Navbar fixed bottom -->
-		</main>
-		<!-- End of main container -->
-	</div>
+            <!-- Search box-->
+            <div id="search">
+                <form>
+                    <input id="searchbar" type="text" name="search" placeholder="Search">
+                </form>
+            </div>
 
-	<!-- Load the map -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXw9qtQjXlE0_KUeS7xw7MRg0hFDAZju8&callback=initMap"></script>
+            <!-- Navbar fixed bottom -->
+            <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#"># of Markers Visible</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <!-- Left nav -->
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Link</a></li>
+                        </ul>
+                        <!-- Right nav -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Center</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <!--/.container -->
+            </div>
+            <!-- Navbar fixed bottom -->
+        </main>
+        <!-- End of main container -->
+    </div>
+
+    <!-- Load the map -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXw9qtQjXlE0_KUeS7xw7MRg0hFDAZju8&callback=initMap"></script>
 </body>
 </html>
