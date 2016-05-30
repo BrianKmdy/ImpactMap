@@ -1,3 +1,16 @@
+<?php 
+
+session_start();
+
+if(!isset($_SESSION['logged_in']))
+{
+
+	header("Location: login.php");
+
+}//check if user is logged in
+
+?>
+
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -76,11 +89,11 @@
 			    <?php
 			    	//$username = "Testy McTestface";
 			    	  //session_start();
-
+					/*
 					  if(!isset($_SESSION['logged_in']))
 					  {
 					  	header("Location: login.php");
-					  }
+					  } */
 			    	  $fname = $_SESSION["logged_in"];
 			    	  $lname = $_SESSION["logged_in2"];
 

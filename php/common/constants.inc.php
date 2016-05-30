@@ -10,4 +10,5 @@ define('DB_NAME', 'ImpactMap');
 define('MAPS_API', '');
 
 $STATUS = array("Planned", "Ongoing", "Completed");
+$TYPE = array("Research", "Audit", "Demonstration", "Others");
 ?>

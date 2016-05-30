@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
 	/**
 	* Called when the user submits the information entered into the edit project dialog. Information is sent over via POST, as is the id of the project being edited.

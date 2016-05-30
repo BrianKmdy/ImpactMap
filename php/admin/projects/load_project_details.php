@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
 	/** 
 	* Called to load all attributes of a specific project. The project id is passed over and the result is returned encoded in json

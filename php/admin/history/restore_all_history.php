@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
 	/**
 	* Called when the root user wants to restore the entire project table to a given point in time.
