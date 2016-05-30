@@ -24,7 +24,7 @@ $authenticated = $row['authenticated'];
 if(!isset($_SESSION['logged_in']))
 {
 
-	header("Location: login.php");
+	header("Location: ../../../login.php");
 	//echo 'Please Log in.';
 
 }//check if user is logged in
