@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
     /**
     * Populates a popup dialog with information about the chosen center
