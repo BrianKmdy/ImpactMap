@@ -797,6 +797,24 @@ function updateProfile() {
     });
 }
 
+function submitUpdateProfile() {
+    console.log("tacos: " + $("#phone").val());
+    // Ajax request to submit the data to the server
+    $.ajax({
+        type: "POST",
+        url: "php/admin/submit_update_profile.php",
+        data: {email: $("#email").val(),
+               phone: $("#phone").val(),
+               newPassword1: $("#newPassword1").val(),
+               newPassword2: $("#newPassword2").val()},
+        data_type: "json",
+        success: function (data) {
+            printCallback(data);
+            loadProfile();
+        }
+    });
+}
+
 /**
 * Load the change password page from change_password.php
 */

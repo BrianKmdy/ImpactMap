@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.htm">
+				<a class="navbar-brand" href="index.html">
 					<img alt="Brand" src="img/brand.png" height="40px" width="40px">
 				</a>
 		    </div>

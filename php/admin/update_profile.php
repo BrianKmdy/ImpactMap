@@ -21,9 +21,8 @@
 
             <div id="password" class="collapse">
                 <br>
-                <label>Old password: </label><input type="text" class="form-control" id="oldPassword" name="oldPassword">
-                <label>New Password: </label><input type="text" class="form-control" id="newPassword1" name="newPassword1">
-                <label>Confirm new Password: </label><input type="text" class="form-control" id="newPassword2" name="newPassword2">
+                <label>New Password: </label><input type="password" class="form-control" id="newPassword1" name="newPassword1">
+                <label>Confirm new Password: </label><input type="password" class="form-control" id="newPassword2" name="newPassword2">
             </div>
         </div>
         <div class="modal-footer">
