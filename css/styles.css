@@ -114,9 +114,9 @@ html, body {
     #banner {
         display: none;
     }
-
+    
     #search {
-        display: none;
+        left: 2%;   
     }
 }
 
@@ -124,6 +124,28 @@ html, body {
     #filter-icon {
         display: none;
     }
+}
+
+/* Search bar under banner */
+#search {
+    padding: 10px;
+    position: absolute;
+    margin-top: 10px;
+    right: 2%;
+    z-index: 1;
+}
+
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 3px solid #424242;
+    border-radius: 4px;
+    font-size: 17px;
+    background-color: white;
+    /* background-image: url('searchicon.png'); */
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
 }
 
 .navbar-inverse .navbar-brand {
@@ -142,7 +164,7 @@ html, body {
     opacity: 0.6;
     position: absolute;
     display: none;
-    background-color: black;
+    background-color: #404040;
 }
 
 #lb {
@@ -153,40 +175,11 @@ html, body {
     width: 85%;
     position: absolute;
     display: none;
-    background-color: black;
-}
-
-#lbL3 {
-    padding-top: 10px;
-    left: 0%;
-    width: 33%;
-    height: 100%;
-    background-color: #242426;
-    display: inline-block;
-    vertical-align: top;
-}
-
-#lbM3 {
-    padding-top: 10px;
-    left: 33%;
-    width: 33%;
-    height: 100%;
-    background-color: #242426;
-    display: inline-block;
-    vertical-align: top;
-}
-
-#lbR3 {
-    padding-top: 10px;
-    left: 66%;
-    width: 33%;
-    height: 100%;
-    background-color: #242426;
-    display: inline-block;
-    vertical-align: top;
+    background-color: #404040;
 }
 
 .lbList {
+    padding-left: 5px;
     color: white;
     font-size: 18px;
     list-style-type: none;
@@ -197,6 +190,7 @@ html, body {
     width: 15%;
     min-width: 8em;
 }
+<<<<<<< HEAD
 #bannerimg{
 	position:absolute;
 	width:15%;
@@ -226,6 +220,8 @@ input[type=text] {
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
+=======
+>>>>>>> origin/master
 
 /* Filter modal pop up */
 .modal-backdrop {

@@ -234,7 +234,7 @@ function validateProjectData(){
         if($("#startDate").val().length < 1)
             string = string.concat("<li><b>Start Date</b> cannot be empty</li>");
         else
-            string = string.concat("<li><b>Start Date</b> must of of the form yyyy-mm-dd</li>");
+            string = string.concat("<li><b>Start Date</b> must be of the form yyyy-mm-dd</li>");
     }
 
     if($("#address").val().length < 1)
@@ -687,11 +687,16 @@ function validateContactData(){
         string = string.concat("<li><b>Email</b> cannot be empty</li>");
     }
 
-    if ($("#phone").val().length < 1) 
+    var phoneRegex = /^(([0-9]{10})|([0-9]{11})|([0-9]{12}))/;
+
+    if ($("#phone").val().length < 1 || !phoneRegex.test($("#phone").val())) 
     {
         $("#phoneGroup").addClass("has-error");
         validInput = false;
-        string = string.concat("<li><b>Phone</b> cannot be empty</li>");
+        if($("#phone").val().length < 1)
+            string = string.concat("<li><b>Phone</b> cannot be empty</li>");
+        else
+            string = string.concat("<li><b>Phone</b> must have atleast 10 digits</li>");
     }
 
     string = string.concat("</ul></div>");
