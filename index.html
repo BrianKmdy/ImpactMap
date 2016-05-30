@@ -69,14 +69,9 @@
 					</nav>
 			</div>
 		</header>
-		<div class="mdl-layout__drawer">
+		<div class="mdl-layout__drawer" id="#collapsingBar">
 			<span style="font-size: 1.5em;" class="mdl-layout-title">IMPACT MAP</span>
-			<nav class="mdl-navigation">
-				<a id="title" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Filters</a>
-				<a class="mdl-navigation__link" href="">Energy Efficiency Center</a>
-				<a class="mdl-navigation__link" href="">Center for Water Energy Efficiency</a>
-				<a class="mdl-navigation__link" href="">California Lighting Technology Center</a>
-				<a class="mdl-navigation__link" href="">Plug-in Hybrid Vehicle</a>
+			<nav class="mdl-navigation" id="list">
 			</nav> <!-- Sidebar Menu Items -->
 		</div> <!-- Sidebar -->
 		<main class="mdl-layout__content">
@@ -136,7 +131,7 @@
 							<form>
 								<div class="form-group">
 									<label for="recipient-name" class="control-label">Centers:</label>
-									<select class="form-control form-control-lg">
+									<select class="form-control form-control-lg" id="centerList">
 										<option selected>Names of Centers</option>
 										<option value="1">One</option>
 										<option value="2">Two</option>
@@ -161,7 +156,7 @@
 								</div>
 								<div class="form-group">
 									<label for="project-name" class="control-label">Projects:</label>
-									<select class="form-control form-control-lg">
+									<select class="form-control form-control-lg" id="projectList">
 										<option selected>Names of Projects</option>
 										<option value="1">One</option>
 										<option value="2">Two</option>
@@ -197,7 +192,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#exCollapsingNavbar" data-dismiss="modal" id="filter-button">Search</button>
+							<button type="button" class="btn btn-primary" data-target="#collapsingBar" data-dismiss="modal" id="filter-button">Search</button>
 						</div>
 					</div>
 				</div>
