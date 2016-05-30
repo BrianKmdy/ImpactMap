@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
 	/**
 	* Called when a user wants to delete projects from the table. The project IDs are sent over as a json encoded array
