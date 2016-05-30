@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <?php
     /**
     * The edit project dialog. Everything is contained in the #popup div. It contains text fields and drop downs to specify all the data attributes for a project.
