@@ -187,7 +187,8 @@ input[type=text] {
 
 /* UC Davis image top-right */
 #banner {
-    width: 15%;
+    width: 270px;
+    height: auto;
     min-width: 8em;
 }
 
