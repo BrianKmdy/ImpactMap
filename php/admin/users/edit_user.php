@@ -1,3 +1,9 @@
+<?php 
+
+    require_once "check_authenticated.php"; 
+
+?>
+
 <?php
     /** 
     * Called when the root admin wants to edit the properties of a user. The id of the user to edit is sent over via POST.
