@@ -55,10 +55,17 @@
 					echo "<tr>";
 					echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $history[$i]['hid'] . "'></td>";
 					echo "<td class='col-xs-1 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['firstName'] . " " . substr($history[$i]['lastName'], 0, 1) . ".</td>";
+
+					$history[$i]['title'] = strlen($history[$i]['title']) > 25 ? substr($history[$i]['title'],0,20)."..." : $history[$i]['title'];
 					echo "<td class='col-xs-2 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['title'] . " </td>";
+
 					echo "<td class='col-xs-1 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['acronym'] . " </td>";
+
 					echo "<td class='col-xs-2 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $STATUS[$history[$i]['status']] . " </td>";
+
 					echo "<td class='col-xs-2 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['startDate'] . " </td>";
+
+					$$history[$i]['summary'] = strlen($history[$i]['summary']) > 25 ? substr($history[$i]['summary'],0,20)."..." : $history[$i]['summary'];
 					echo "<td class='col-xs-3 clickable' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . substr($history[$i]['summary'], 0, 80) . "..." . " </td>";
 					echo "</tr>";
 				}

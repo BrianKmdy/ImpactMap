@@ -48,6 +48,7 @@
 						echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $centers[$i]['cid'] . "'></td>";
 					}
 					
+					$centers[$i]['name'] = strlen($cetners[$i]['name']) > 30 ? substr($centers[$i]['name'],0,25)."..." : $centers[$i]['name'];
 					echo "<td class='clickable col-xs-4' onclick=editCenter(" . $centers[$i]['cid'] . ")> " . $centers[$i]['name'] . " </td>";
 					echo "<td class='clickable col-xs-4' onclick=editCenter(" . $centers[$i]['cid'] . ")> " . $centers[$i]['acronym'] . " </td>";
 					echo "<td class='clickable col-xs-3' onclick=editCenter(" . $centers[$i]['cid'] . ") style='color: " . $centers[$i]['color'] . "'> " . $centers[$i]['color'] . " </td>";

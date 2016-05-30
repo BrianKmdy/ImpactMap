@@ -218,7 +218,7 @@ function validateProjectData(){
     $("#resultsGroup").removeClass("has-error");
     $("#fundedByGroup").removeClass("has-error");
 
-    var dateRegex = /^(20[0-9]{2})-([1-9]{1}|1[1-2]{1})-([1-9]{1}|[1-3]{1}[1-9]{1})$/;
+    var dateRegex = /^(20[0-9]{2})-(0[1-9]{1}|[1-9]{1}|1[1-2]{1})-([1-9]{1}|[1-3]{1}[1-9]{1})$/;
 
     if ($("#title").val().length < 1) 
     {

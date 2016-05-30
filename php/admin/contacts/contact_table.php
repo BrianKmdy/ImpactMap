@@ -49,6 +49,8 @@
 					}
 					
 					echo "<td class='clickable col-xs-4' class='clickable' onclick=editContact(" . $contacts[$i]['conid'] . ")> " . $contacts[$i]['name'] . " </td>";
+
+					$contacts[$i]['email'] = strlen($contacts[$i]['email']) > 35 ? substr($contacts[$i]['email'],0,30)."..." : $contacts[$i]['email'];
 					echo "<td class='clickable col-xs-4' class='clickable' onclick=editContact(" . $contacts[$i]['conid'] . ")> " . $contacts[$i]['email'] . " </td>";
 					echo "<td class='clickable col-xs-3' class='clickable' onclick=editContact(" . $contacts[$i]['conid'] . ")> " . $contacts[$i]['phone'] . " </td>";
 					echo "</tr>";

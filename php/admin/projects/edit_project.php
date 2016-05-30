@@ -65,7 +65,17 @@
                 echo '<label>Zip Code: </label><input type="text" class="form-control" id="zip" name="zip" value="' . $project['zip'] . '">';
                 echo '</div>';
                 echo '<div id="projectPickerMap"></div>';
-                echo '<label>Type: </label><select type="text" class="form-control" id="type" name="type" value="' . $project['type'] . '"></select>';
+
+                echo '</select>';
+                echo '<label>Type: </label><select type="text" class="form-control" id="type" name="type">';
+                for ($i = 0; $i < count($TYPE); $i++) {
+                    echo "<option value='" . $i . "'";
+                    if ($i == $project['type'])
+                        echo "selected='selected'";
+                    echo ">" . $TYPE[$i] . "</option>";
+                }
+                echo "</select>";
+                
                 echo '<div class="form-group" id="summaryGroup">';
                 echo '<label>Summary: </label><textarea class="form-control" id="summary"  name="summary" rows="10">' . $project['summary'] . '</textarea>';
                 echo '</div>';
