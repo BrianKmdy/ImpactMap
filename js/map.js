@@ -1,6 +1,7 @@
 var map;
 var markers = [];
 var markerCluster;
+var centers;
 
 var projectCenter = -1;
 var projectType = -1;
@@ -91,6 +92,22 @@ $(document).ready(function () {
 			}
 		});
 	});
+
+
+	$.ajax({
+		type: 'POST',
+		url: '../php/map/centers.php',
+		success: function(data){
+			centers = JSON.parse(data);
+			
+			for(i=0; i<centers.length; ++i){
+			var center = centers[i];
+			var content = '<option value="' + center.cid+ '">'+ center.name + '</option>'; 
+			$(content).appendTo('#centerList');
+		}
+	}
+	});
+
 
 	$.ajax({
 		type: 'POST',
