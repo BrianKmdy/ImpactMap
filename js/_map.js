@@ -1,6 +1,7 @@
 var map;
 var markers = [];
-var test = true;
+var markerCluster;
+var test = false;
 
 /** 
 * Called when the web page is loaded. Initializes the search suggestion engine and readies the search bar for queries.
@@ -68,27 +69,7 @@ $(document).ready(function () {
 		var startDate = $('#start-date').val();         //Default: empty (all)
 		var endDate = $('#end-date').val();             //Default: empty (all)
 
-		$.ajax({
-			type: 'POST',
-			url: '../php/map/filter.php',
-			data: {
-				center: projectCenter,
-				type: projectType,
-				status: projectStatus,
-				start: startDate,
-				end: endDate
-			},
-			dataType: "json",
-			success: function (data) {
-				console.log('here1');
-				//Do stuff here... data is JSON with keys: 'pid', 'title', 'lat', 'lng'
 
-			},
-			complete: function () {
-				console.log('here2');
-				$('#filter-modal').hide();          //Close the filter modal after code runs
-			}
-		});
 	});
 });
 
@@ -100,7 +81,7 @@ function lightboxPopup(pid) {
 		data: {
 			pid: pid
 		},
-		dataType: "json",
+		dataType: json,
 		success: function (data) {
 			//Do stuff here... data is in JSON with same column names as Projects table
 
@@ -217,8 +198,28 @@ function initMap() {
 		}]
 	});
 	/* End of var map */
+}
 
-	var markers = []; // marker array to display on the map
+function loadProjects() {
+	$.ajax({
+		type: 'POST',
+		url: '../php/map/filter.php',
+		data: {
+			center: projectCenter,
+			type: projectType,
+			status: projectStatus,
+			start: startDate,
+			end: endDate
+		},
+		dataType: json,
+		success: function (data) {
+			//Do stuff here... data is JSON with keys: 'pid', 'title', 'lat', 'lng'
+
+		},
+		complete: function () {
+			$('#filter-modal').hide();          //Close the filter modal after code runs
+		}
+	});
 
 	var projects;
 	if (test)
