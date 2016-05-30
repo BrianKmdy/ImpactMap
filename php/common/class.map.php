@@ -970,7 +970,7 @@ class Map {
             } else
                 $type_low = $type_hi = intval($filters['type']);
 
-            $start = empty($filters['start']) ? '1900-01-01' : date('Y-m-d', strtotime($filters['end']));
+            $start = empty($filters['start']) ? '1900-01-01' : date('Y-m-d', strtotime($filters['start']));
             $end = empty($filters['end']) ? date('Y-m-d') : date('Y-m-d', strtotime($filters['end']));
 
             $stmt = $this->_db->prepare($sql);

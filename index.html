@@ -51,7 +51,6 @@
 </head>
 
 <body>
-
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
@@ -73,10 +72,13 @@
                 <a class="mdl-navigation__link" href="">Center for Water Energy Efficiency</a>
                 <a class="mdl-navigation__link" href="">California Lighting Technology Center</a>
                 <a class="mdl-navigation__link" href="">Plug-in Hybrid Vehicle</a>
+
+		<div class="mdl-layout__drawer" id="#collapsingBar">
+			<span style="font-size: 1.5em;" class="mdl-layout-title">IMPACT MAP</span>
+			<nav class="mdl-navigation" id="list">
             </nav> <!-- Sidebar Menu Items -->
         </div> <!-- Sidebar -->
         <main class="mdl-layout__content">
-
             <!-- Google map -->
             <div id="map"></div>
 
@@ -133,6 +135,7 @@
                                     <label for="recipient-name" class="control-label">Centers:</label>
                                     <select class="form-control form-control-lg" id="centerList">
                                         <option selected>Names of Centers</option>
+
                                     </select>
                                     <input type="text" class="form-control" id="recipient-name">
                                 </div>
@@ -144,9 +147,15 @@
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
+                                    
                                 </div>
+                             
                                 <div class="form-group">
+
                                     <label for="dates" class="control-label">Dates:</label>
+
+                                	<label for="dates" class="control-label">Dates:</label>
+
                                     <div class="input-daterange input-group" id="datepicker">
                                         <input type="text" class="input-sm form-control" name="start" />
                                         <span class="input-group-addon">to</span>

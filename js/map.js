@@ -1,6 +1,13 @@
 var map;
 var markers = [];
-var test = true;
+var markerCluster;
+var centers;
+
+var projectCenter = -1;
+var projectType = -1;
+var projectStatus = -1;
+var startDate = "1970-01-01";
+var endDate = "3000-01-01";
 
 /** 
 * Called when the web page is loaded. Initializes the search suggestion engine and readies the search bar for queries.
@@ -62,11 +69,11 @@ $(document).ready(function () {
 
 	$('#filter-button').click(function (event) {
 		event.preventDefault();                         //Prevents button default event
-		var projectCenter = $('#centers').val();        //Default: -1 (all)
-		var projectType = $('#project-type').val();     //Default: -1 (all)
-		var projectStatus = $("#project-status").val(); //Default: -1 (all)
-		var startDate = $('#start-date').val();         //Default: empty (all)
-		var endDate = $('#end-date').val();             //Default: empty (all)
+		projectCenter = $('#centers').val();        //Default: -1 (all)
+		projectType = $('#project-type').val();     //Default: -1 (all)
+		projectStatus = $("#project-status").val(); //Default: -1 (all)
+		startDate = $('#start-date').val();         //Default: empty (all)
+		endDate = $('#end-date').val();             //Default: empty (all)
 
 		$.ajax({
 			type: 'POST',
@@ -79,16 +86,45 @@ $(document).ready(function () {
 				end: endDate
 			},
 			dataType: "json",
-			success: function (data) {
-				console.log('here1');
-				//Do stuff here... data is JSON with keys: 'pid', 'title', 'lat', 'lng'
-
-			},
+			success: showProjects,
 			complete: function () {
-				console.log('here2');
 				$('#filter-modal').hide();          //Close the filter modal after code runs
 			}
 		});
+	});
+
+
+	$.ajax({
+		type: 'POST',
+		url: '../php/map/centers.php',
+		success: function(data){
+			centers = JSON.parse(data);
+			
+			for(i=0; i<centers.length; ++i){
+			var center = centers[i];
+			var content = '<option value="' + center.cid+ '">'+ center.name + '</option>'; 
+			$(content).appendTo('#centerList');
+		}
+	}
+	});
+
+
+	$.ajax({
+		type: 'POST',
+		url: '../php/map/filter.php',
+		data: {
+			center: projectCenter,
+			type: projectType,
+			status: projectStatus,
+			start: startDate,
+			end: endDate
+		},
+		data_type: "json",
+		success: showProjects,
+		complete: function () {
+			console.log('test');
+			$('#filter-modal').hide();          //Close the filter modal after code runs
+		}
 	});
 });
 
@@ -113,7 +149,7 @@ function lightboxPopup(pid) {
 
 /* Initialize map elements and markers */
 function initMap() {
-	var map = new google.maps.Map(document.getElementById('map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		center: {
 			lat: 38.5420697,
@@ -217,24 +253,23 @@ function initMap() {
 		}]
 	});
 	/* End of var map */
+}
 
-	var markers = []; // marker array to display on the map
-
-	var projects;
-	if (test)
-		projects = data.photos;
-	else
-		projects = loadProjects();
-
+function showProjects(data) {
+	var projects = JSON.parse(data);
+	console.log(projects);
+	$('#list').html('');
 	/* Marker creation dependant on json */
 	for (var i = 0; i < projects.length; ++i) {
 		var project = projects[i];
-		var projectInfo = "Basic project info here";
-		var latLng = new google.maps.LatLng(project.latitude,
-            project.longitude);
+		var content = '<a class="mdl-navigation__link" href="">' + project.title+ '</a>';
+		$(content).appendTo('#list');
+		//$('#list').html(content);
+		var latLng = new google.maps.LatLng(project.lat,
+            project.lng);
 		var iWindow = new google.maps.InfoWindow({ //create infow windows for each marker
 			position: latLng,
-			content: projectInfo
+			content: project.title
 		});
 		var marker = new google.maps.Marker({
 			map: map,
@@ -256,7 +291,7 @@ function initMap() {
 		markers.push(marker);
 	}
 	/* Marker cluster (non-standard markers with numbers) */
-	var markerCluster = new MarkerClusterer(map, markers);
+	markerCluster = new MarkerClusterer(map, markers);
 }
 
 
@@ -282,4 +317,13 @@ function dismissLB() {  // dismiss light box on clicking outside
 	lbFG.style.display = "none";
 
 	document.getElementById('info1').innerHTML = "";
+}
+
+/**
+* Print any callback data passed after an ajax call
+*
+* @param data The data to be printed
+*/
+function printCallback(data) {
+    console.log(data);
 }
