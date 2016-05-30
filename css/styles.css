@@ -50,7 +50,7 @@ html, body {
 /* Bottom navigation bar */
 .navbar {
 	padding: 0.1%;
-	letter-spacing: 0.2em;
+	letter-spacing: 0.1em;
 	margin: 0;
 	margin-bottom: 0;
 	border: 0;
@@ -66,7 +66,7 @@ html, body {
 
 .navbar li a {
 	font-family: 'proxima', sans-serif;
-	font-size: 2em;
+	font-size: 1.25em;
 	color: #fff !important;
 }
 
@@ -81,19 +81,6 @@ html, body {
 		display: none;
 	}
 
-	.navbar {
-		padding: 0;
-	}
-
-		.navbar li a {
-			font-size: 1.25em;
-			color: #fff !important;
-		}
-
-	.navbar-inverse .navbar-brand {
-		font-size: 1.25em;
-	}
-
 	#banner {
 		display: none;
 	}
@@ -106,7 +93,7 @@ html, body {
 .navbar-inverse .navbar-brand {
 	display: inline;
 	color: white;
-	font-size: 2em;
+	font-size: 1.25em;
 	font-family: 'futura', sans-serif;
 }
 
@@ -170,8 +157,10 @@ html, body {
 
 /* UC Davis image top-right */
 #banner {
-	float: right;
-	width: 8%;
+	padding: 10%;
+	font-size: 2em;
+	width: 10%;
+	height: 95.97px;
 	min-width: 8em;
 }
 
@@ -205,5 +194,5 @@ input[type=text] {
 
 .modal-content {
 	z-index: 1;
-	margin-top: 20%;
+	margin-top: 10%;
 }
