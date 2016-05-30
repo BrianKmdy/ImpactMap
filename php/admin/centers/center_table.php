@@ -1,3 +1,9 @@
+<?php 
+
+	require_once "check_authenticated.php";	
+
+?>
+
 <div class="panel panel-default">
 	<table class="table table-hover table-fixed">
 		<thead>
