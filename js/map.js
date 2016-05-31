@@ -11,6 +11,9 @@ var projectStatus = -1;
 var startDate = "1970-01-01";
 var endDate = "3000-01-01";
 
+var statuses = ["Planned", "Ongoing", "Completed"]; 
+var types = ["Research", "Audit", "Deomonstration", "Others"];
+
 /** 
 * Called when the web page is loaded. Initializes the search suggestion engine and readies the search bar for queries.
 */
@@ -119,10 +122,10 @@ function lightboxPopup(pid) {
 		},
 		dataType: "json",
 		success: function (project) {
-			console.log(project);
-			console.log(project.link);
 			$("#center").html(project.centerName);
 			$("#project").html(project.title);
+			$("#status").html(statuses[project.status]);
+			$("#type").html(types[project.type]);
 			$("#date").html("Started on " + project.startDate + ((project.endDate.length > 0) ? "<br>Finished on " + project.endDate : ""));
 			$("#location").html(((project.buildingName.length > 0) ? project.buildingName + "<br>" : "") + project.address + ", " + project.zip);
 			$("#summary").html(project.summary);
@@ -295,7 +298,7 @@ function showProjects(projects) {
 			var iWindow = new google.maps.InfoWindow({ //create infow windows for each marker
 				position: latLng,
 				pid: project.pid,
-				content: project.title
+				content: "<b>" + project.title + "</b><br>" + types[project.type] + "<br>" + project.address
 			});
 			iWindows[project.pid] = iWindow;
 			var marker = new google.maps.Marker({
@@ -345,6 +348,8 @@ function dismissLB() {  // dismiss light box on clicking outside
 
 	$("#center").html("");
 	$("#project").html("");
+	$("#status").html("");
+	$("#type").html("");
 	$("#date").html("");
 	$("#location").html("");
 	$("#summary").html("");

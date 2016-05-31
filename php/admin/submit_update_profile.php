@@ -24,7 +24,7 @@
 				echo 'blarg';
 			}
 	
-			if (strlen($_POST['newPassword1']) > 0 && strlen($_POST['newPassword2']) > 0 && strcmp($_POST['newPassword1'], $_POST['newPassword2']) == 0) {
+			if (strlen($_POST['newPassword1']) >= 6 && strlen($_POST['newPassword2']) >= 6 && strcmp($_POST['newPassword1'], $_POST['newPassword2']) == 0) {
 				echo 'burritos';
 				$map->change_password($row['email'], md5($_POST['newPassword1']));
 			}

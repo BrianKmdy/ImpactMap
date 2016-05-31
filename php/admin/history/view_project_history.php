@@ -29,10 +29,10 @@
         </div>
         <div class="modal-body">
             <?php
-                echo '<label>Title: </label><input type="text" class="form-control" id="title" name="title" value="' . $history['title'] . '" disabled="disabled">';
                 echo '<label>Center: </label><select type="text" class="form-control" id="cid" name="cid" disabled="disabled">';
                 $center = $map->load_center($history['cid']);
                 echo "<option value='" . $center['cid'] ."' selected='selected'>" . $center['name'] . " (" . $center['acronym'] . ")</option></select>";
+                echo '<label>Title: </label><input type="text" class="form-control" id="title" name="title" value="' . $history['title'] . '" disabled="disabled">';
                 echo '<label>Status: </label><select type="text" class="form-control" id="status" name="status" disabled="disabled">';
                 echo "<option value='" . $i . "' selected='selected'>" . $STATUS[$history['status']] . "</option>";
                 echo "</select>";
@@ -46,11 +46,11 @@
                 echo '<label>Summary: </label><textarea class="form-control" id="summary"  name="summary" rows="10" disabled="disabled">' . $history['summary'] . '</textarea>';
                 echo '<label>Results: </label><textarea class="form-control" id="results"  name="results" rows="10" disabled="disabled">' . $history['results'] . '</textarea>';
                 echo '<label>Link: </label><input type="text" class="form-control" id="link" name="link" value="' . $history['link'] . '" disabled="disabled">';
-                echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $history['pic'] . '" disabled="disabled">';
                 echo '<label>Contact: </label><select type="text" class="form-control" id="conid" name="conid" disabled="disabled">';
                 $contact = $map->load_contact($history['conid']);
                 echo "<option value='" . $contact['conid'] ."' selected='selected'>" . $contact['name'] . "</option></select>";
                 echo '<label>Funded by: </label><input type="text" class="form-control" id="fundedBy" name="fundedBy" value="' . $history['fundedBy'] . '" disabled="disabled">';
+                echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $history['pic'] . '" disabled="disabled">';
                 echo '<label>Keywords: </label><input type="text" class="form-control" id="keywords" name="keywords" value="' . $history['keywords'] . '" disabled="disabled">';
                 echo '<label>Visibility: </label><select type="text" class="form-control" id="visible" name="visible" disabled="disabled">';
                 if ($history['visible'] == 1) {
