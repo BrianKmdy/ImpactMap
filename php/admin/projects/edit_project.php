@@ -22,6 +22,9 @@
     $project = $map -> load_project_details($pid);
 ?>
 
+<link  href="../../../lib/cropper/dist/cropper.css" rel="stylesheet">
+<script src="../../../lib/cropper/dist/cropper.js"></script>
+
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -92,6 +95,7 @@
                 echo '<label>Picture upload: </label><input type="file" class="form-control-file" id="pic" name="pic">';
 
                 echo '</div>';
+                echo '<div class="col-md-12"><img id="upload-preview" src="#" style="display:none; max-width:100%; max-height:100%;"></div>';
                 //echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $project['pic'] . '">';
 
                 echo '<label>Contact: </label><select type="text" class="form-control" id="conid" name="conid">';
@@ -131,3 +135,34 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+
+<script>
+    $('#pic').change(function() {
+        readURL(this);
+        $('#upload-preview').show();
+    });
+    $('#upload-preview').cropper({
+        aspectRatio: 16 / 9,
+        crop: function(e) {
+            // Output the result data for cropping image.
+            console.log(e.x);
+            console.log(e.y);
+            console.log(e.width);
+            console.log(e.height);
+            console.log(e.rotate);
+            console.log(e.scaleX);
+            console.log(e.scaleY);
+        }
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#upload-preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

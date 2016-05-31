@@ -48,12 +48,12 @@ class AWS {
      * Cross-dependency: File key is project ID, file upload name is "pic"
      *
      * @param int $pid  The project ID/file key (without extension)
-     * @return bool     Whether file is successfully uploaded
+     * @return string   The URL of the saved picture. Empty if failed.
      */
     public function upload_object($pid) {
         if (!isset($_FILES['pic'])) {
             echo "No file uploaded.";
-            return FALSE;
+            return "";
         }
         $pid = intval($pid);
         $filename = $_FILES['pic']['tmp_name'];
@@ -68,7 +68,7 @@ class AWS {
             $img = imagecreatefromgif($filename);
         } else {
             echo "File type not supported.";
-            return FALSE;
+            return "";
         }
 
         if ($img !== NULL) {
@@ -86,9 +86,9 @@ class AWS {
                 'Key' => $pid.AWS_PICTURE_EXT,
                 'SourceFile' => $temp
             ));
-            return TRUE;
+            return AWS_PICTURE_SOURCE.$pid.AWS_PICTURE_EXT;
         }
-        return FALSE;
+        return "";
     }
 
 
