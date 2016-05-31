@@ -179,11 +179,11 @@ class Map {
      * Must be set: POST, POST[address], POST[title], POST[description]
      * @return bool
      */
-    public function add_project() {
+    public function add_project($uid) {
       $sql = "INSERT INTO Projects(cid, title, status, startDate, endDate, buildingName, address, zip, type, summary, results, link, pic, conid, fundedBy, keywords, stemmedSearchText, visible, lat, lng) 
               VALUES (:cid, :title, :status, :startDate, :endDate, :buildingName, :address, :zip, :type, :summary, :results, :link, :pic, :conid, :fundedBy, :keywords, :stemmedSearchText, :visible, :lat, :lng);
-              INSERT INTO History(pid, cid, title, status, startDate, endDate, buildingName, address, zip, type, summary, results, link, pic, conid, fundedBy, keywords, stemmedSearchText, visible, lat, lng) 
-              VALUES ((SELECT MAX(pid) FROM Projects),:cid, :title, :status, :startDate, :endDate, :buildingName, :address, :zip, :type, :summary, :results, :link, :pic, :conid, :fundedBy, :keywords, :stemmedSearchText, :visible, :lat, :lng)";
+              INSERT INTO History(pid, cid, title, status, startDate, endDate, buildingName, address, zip, type, summary, results, link, pic, conid, fundedBy, keywords, stemmedSearchText, visible, lat, lng, editedBy) 
+              VALUES ((SELECT MAX(pid) FROM Projects),:cid, :title, :status, :startDate, :endDate, :buildingName, :address, :zip, :type, :summary, :results, :link, :pic, :conid, :fundedBy, :keywords, :stemmedSearchText, :visible, :lat, :lng, :editedBy)";
       try {
           $stmt = $this->_db->prepare($sql);
           $stmt -> bindParam(":cid",               $_POST['cid'], PDO::PARAM_INT);
@@ -206,6 +206,7 @@ class Map {
           $stmt -> bindParam(":visible",           $_POST['visible'], PDO::PARAM_BOOL);
           $stmt -> bindParam(":lat",               $_POST['lat'], PDO::PARAM_STR);
           $stmt -> bindParam(":lng",               $_POST['lng'], PDO::PARAM_STR);
+          $stmt -> bindParam(":editedBy",          $uid, PDO::PARAM_INT);
           $stmt -> execute();
           return TRUE;
       } catch(PDOException $e) {
@@ -218,11 +219,11 @@ class Map {
     * Update a project in the database and add a new entry to the history, requires all columns of data to be present in POST
     *
     */
-    public function update_project() {
+    public function update_project($uid) {
         $sql = "UPDATE Projects SET cid = :cid, title = :title, status = :status, startDate = :startDate, endDate = :endDate, buildingName = :buildingName, address = :address, zip = :zip, type = :type, summary = :summary, results = :results,
                                     link = :link, pic = :pic, conid = :conid, fundedBy = :fundedBy, keywords = :keywords, stemmedSearchText = :stemmedSearchText, visible = :visible, lat = :lat, lng = :lng WHERE pid = :pid LIMIT 1;
-                INSERT INTO History(pid, cid, title, status, startDate, endDate, buildingName, address, zip, type, summary, results, link, pic, conid, fundedBy, keywords, stemmedSearchText, visible, lat, lng) 
-                VALUES (:pid, :cid, :title, :status, :startDate, :endDate, :buildingName, :address, :zip, :type, :summary, :results, :link, :pic, :conid, :fundedBy, :keywords, :stemmedSearchText, :visible, :lat, :lng)";
+                INSERT INTO History(pid, cid, title, status, startDate, endDate, buildingName, address, zip, type, summary, results, link, pic, conid, fundedBy, keywords, stemmedSearchText, visible, lat, lng, editedBy) 
+                VALUES (:pid, :cid, :title, :status, :startDate, :endDate, :buildingName, :address, :zip, :type, :summary, :results, :link, :pic, :conid, :fundedBy, :keywords, :stemmedSearchText, :visible, :lat, :lng, :editedBy)";
 
         try {
             $stmt = $this->_db->prepare($sql);
@@ -247,6 +248,7 @@ class Map {
             $stmt -> bindParam(":visible",           $_POST['visible'], PDO::PARAM_BOOL);
             $stmt -> bindParam(":lat",               $_POST['lat'], PDO::PARAM_STR);
             $stmt -> bindParam(":lng",               $_POST['lng'], PDO::PARAM_STR);
+            $stmt -> bindParam(":editedBy",          $uid, PDO::PARAM_INT);
             $stmt -> execute();
             return TRUE;
         } catch(PDOException $e) {
@@ -308,12 +310,12 @@ class Map {
      */
     public function load_project_details($pid) {
         $pid = intval($pid);
-        $sql = "SELECT * FROM Projects LEFT JOIN Centers ON Projects.cid=Centers.cid  WHERE pid=:pid LIMIT 1";
+        $sql = "SELECT Centers.*, Centers.name AS centerName, Contacts.*, Contacts.name AS contactName, Projects.* FROM Projects LEFT JOIN Centers ON Projects.cid=Centers.cid LEFT JOIN Contacts ON Projects.conid=Contacts.conid WHERE pid=:pid LIMIT 1";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt -> bindParam(":pid", $pid, PDO::PARAM_INT);
             $stmt -> execute();
-            return $stmt -> fetch();
+            return $stmt -> fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
             echo $e -> getMessage();
             return NULL;
@@ -826,12 +828,12 @@ class Map {
     * Search the Projects table for any projects whose stemmedSearchText column matches the give search text
     */
     public function search($searchPhrase) {
-        $sql = "SELECT title FROM Projects WHERE MATCH (stemmedSearchText) AGAINST (:searchPhrase IN BOOLEAN MODE) AND visible = TRUE LIMIT 10";
+        $sql = "SELECT pid, lat, lng, title FROM Projects WHERE MATCH (stemmedSearchText) AGAINST (:searchPhrase IN BOOLEAN MODE) AND visible = TRUE LIMIT 10";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt -> bindParam(":searchPhrase", $searchPhrase, PDO::PARAM_STR);
             $stmt -> execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo $e -> getMessage();
         }
@@ -948,7 +950,7 @@ class Map {
         $filters = array_merge($defaults, $filters);
 
         $results = NULL;
-        $sql = "SELECT pid, lat, lng, title FROM Projects WHERE visible = true AND
+        $sql = "SELECT pid, lat, lng, title, cid FROM Projects WHERE visible = true AND
                   cid >= :cid_low AND cid <= :cid_hi AND
                   status >= :status_low AND status <= :status_hi AND
                   type >= :type_low AND type <= :type_hi AND

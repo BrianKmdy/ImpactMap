@@ -68,13 +68,8 @@
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span style="font-size: 1.5em; margin-top: 80px;" class="mdl-layout-title">About</span>
-            <nav class="mdl-navigation">
-                <a id="mobile-filter" class="mdl-navigation__link" href="#" data-toggle="modal" data-target=".bs-example-modal-lg">Filters</a>
-                <a class="mdl-navigation__link" href="">Energy Efficiency Center</a>
-                <a class="mdl-navigation__link" href="">Center for Water Energy Efficiency</a>
-                <a class="mdl-navigation__link" href="">California Lighting Technology Center</a>
-                <a class="mdl-navigation__link" href="">Plug-in Hybrid Vehicle</a>
+            <span style="font-size: 1.5em; margin-top: 80px;" class="mdl-layout-title">Projects</span>
+            <nav class="mdl-navigation" id="list">
             </nav> <!-- Sidebar Menu Items -->
         </div> <!-- Sidebar -->
         <main class="mdl-layout__content">
@@ -90,33 +85,55 @@
             <div id="lb"> <!-- Actual lightbox box -->
                         <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col"><ul class="lbList">
-                        <li> <b>Center</b> </li>
+                        <li> 
+                            <b>Center</b>
+                            <div id="center"></div>
+                        </li>
                         <br>
-                        <li> <b>Project</b> </li>
+                        <li> 
+                            <b>Project</b> 
+                            <div id="project"></div>
+                        </li>
                         <br>
-                        <li> <b>Date</b> </li>
+                        <li> 
+                            <b>Date</b> 
+                            <div id="date"></div>
+                        </li>
                         <br>
-                        <li> <b>Location</b> </li>
+                        <li> 
+                            <b>Location</b>
+                            <div id="location"></div>
+                        </li>
                         <br>
                         <li>
                             <b>Summary</b>
-                            <p> Lorem ipsum dolor sit amet, urna pulvinar, posuere dui sit urna condimentum. Libero dolor non praesent quisque varius vitae. Congue maecenas malesuada, id ut pede maecenas ante phasellus eu, velit eros, sem eu eros duis phasellus. Sit lectus volutpat, elit habitasse aliquam pede ante vel, elit leo est vel porttitor, sem sem neque.<p>
+                            <div id="summary"></div>
                         </li>
                         <br>
                     </ul></div>
   <div class="mdl-cell mdl-cell--4-col"><ul class="lbList">
-                        <li> <b>Results</b> </li>
-                        <br>
-                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        <p>
+                        <li> 
+                            <b>Results</b>
+                            <div id="results"></div>
+                        </li>
                     </ul></div>
   <div class="mdl-cell mdl-cell--4-col">                    <ul class="lbList">
-                        <li> <b>Learn More</b> </li>
+                        <li> 
+                            <div id="learn"></div>
+                        </li>
+                        <li> 
+                            <b>Contact</b>
+                            <div id="contact"></div>
+                        </li>
                         <br>
-                        <li> <b>Contact</b> </li>
+                        <li> 
+                            <b>Funded by:</b> 
+                            <div id="fundedBy"></div>
+                        </li>
                         <br>
-                        <li> <b>Funded by:</b> </li>
-                        <br>
+                        <li>
+                            <div id="pic"></div>
+                        </li>
                     </ul>
                 </div></div>
 </div>
@@ -134,17 +151,7 @@
                             	<label for="recipient-name" class="control-label">Centers:</label>
                                 <div class="form-group">
                                     <select class="col-md-4" id="centerList">
-                                        <option selected>Names of Centers</option>
-                                    </select>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="project-name" class="control-label">Projects:</label>
-                                    <select class="form-control form-control-lg">
-                                        <option selected>Names of Projects</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <option value="-1">All</option>
                                     </select>
                                 </div>
                                 <br>
@@ -212,8 +219,7 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <!-- Right nav -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Center</a></li>
+                        <ul class="nav navbar-nav navbar-right" id="centersNav">
                         </ul>
                     </div>
                     <!--/.nav-collapse -->

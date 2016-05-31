@@ -1,5 +1,7 @@
 var map;
+var pins = [];
 var markers = [];
+var iWindows = [];
 var markerCluster;
 var centers;
 
@@ -44,26 +46,53 @@ $(document).ready(function () {
 	// When the user presses enter in the search bar send a search request to the server
 	$('#searchbar').keypress(function (event) {
 		if (event.which == 13) {
-			// Convert all of the words in the user's search query to their root form (i.e. running -> run)
-			var stemmer = new Snowball("english");
-			var searchWords = $("#searchbar").val().split(" ");
-			searchWords.forEach(function (word, i, words) {
-				stemmer.setCurrent(word);
-				stemmer.stem();
-				words[i] = stemmer.getCurrent();
-			});
-			console.log(searchWords.join(" "));
+			if ($("#searchbar").val().length > 0) {
+				// Convert all of the words in the user's search query to their root form (i.e. running -> run)
+				var stemmer = new Snowball("english");
+				var searchWords = $("#searchbar").val().split(" ");
+				searchWords.forEach(function (word, i, words) {
+					stemmer.setCurrent(word);
+					stemmer.stem();
+					words[i] = stemmer.getCurrent();
+				});
+				console.log(searchWords.join(" "));
 
-			// Send the search terms to the server and print any matches
-			$.ajax({
-				type: "POST",
-				url: "../php/map/search.php",
-				data: { stemmedSearchText: searchWords.join(" ") },
-				data_type: "json",
-				success: function (data) {
-					console.log(data);
-				}
-			});
+				// Send the search terms to the server and print any matches
+				$.ajax({
+					type: "POST",
+					url: "../php/map/search.php",
+					data: { stemmedSearchText: searchWords.join(" ") },
+					data_type: "json",
+					success: function (data) {
+						showProjects(JSON.parse(data));
+					}
+				});
+			} else {
+				getProjects();
+			}
+		}
+	});
+
+	$.ajax({
+		type: 'POST',
+		url: '../php/map/centers.php',
+		success: function(data){
+			centers = JSON.parse(data);
+
+			generatePins();
+			
+			for(i=0; i<centers.length; ++i){
+				var center = centers[i];
+				var filterContent = '<option value="' + center.cid + '">'+ center.name + '</option>'; 
+				$(filterContent).appendTo('#centerList');
+
+				var navContent = '<li><a href="#" data-toggle="tooltip" style="background-color: ' + center.color + ' !important;" onclick="filterCenter(' + center.cid + ')" title="' + center.name + '">' + center.acronym + '</a></li>';
+				$(navContent).appendTo('#centersNav');
+			}
+
+			$('[data-toggle="tooltip"]').tooltip(); 
+
+			getProjects();
 		}
 	});
 
@@ -75,61 +104,13 @@ $(document).ready(function () {
 		startDate = $('#start-date').val();         //Default: empty (all)
 		endDate = $('#end-date').val();             //Default: empty (all)
 
-		$.ajax({
-			type: 'POST',
-			url: '../php/map/filter.php',
-			data: {
-				center: projectCenter,
-				type: projectType,
-				status: projectStatus,
-				start: startDate,
-				end: endDate
-			},
-			dataType: "json",
-			success: showProjects,
-			complete: function () {
-				$('#filter-modal').hide();          //Close the filter modal after code runs
-			}
-		});
-	});
-
-
-	$.ajax({
-		type: 'POST',
-		url: '../php/map/centers.php',
-		success: function(data){
-			centers = JSON.parse(data);
-			
-			for(i=0; i<centers.length; ++i){
-			var center = centers[i];
-			var content = '<option value="' + center.cid+ '">'+ center.name + '</option>'; 
-			$(content).appendTo('#centerList');
-		}
-	}
-	});
-
-
-	$.ajax({
-		type: 'POST',
-		url: '../php/map/filter.php',
-		data: {
-			center: projectCenter,
-			type: projectType,
-			status: projectStatus,
-			start: startDate,
-			end: endDate
-		},
-		data_type: "json",
-		success: showProjects,
-		complete: function () {
-			console.log('test');
-			$('#filter-modal').hide();          //Close the filter modal after code runs
-		}
+		getProjects();
 	});
 });
 
 //Shows lightbox, call this function when map marker is clicked. Parameters is the project ID
 function lightboxPopup(pid) {
+	console.log(pid);
 	$.ajax({
 		type: 'POST',
 		url: '../php/map/get_project.php',
@@ -137,9 +118,21 @@ function lightboxPopup(pid) {
 			pid: pid
 		},
 		dataType: "json",
-		success: function (data) {
-			//Do stuff here... data is in JSON with same column names as Projects table
+		success: function (project) {
+			console.log(project);
+			console.log(project.link);
+			$("#center").html(project.centerName);
+			$("#project").html(project.title);
+			$("#date").html("Started on " + project.startDate + ((project.endDate.length > 0) ? "<br>Finished on " + project.endDate : ""));
+			$("#location").html(((project.buildingName.length > 0) ? project.buildingName + "<br>" : "") + project.address + ", " + project.zip);
+			$("#summary").html(project.summary);
+			$("#results").html(project.results);
+			$("#learn").html((project.link.length > 0) ? "<b>Learn more</b><br><a href='" + project.link  + "'>" + project.link + "</a><br><br>" : "");
+			$("#contact").html(project.contactName + "<br>" + project.email + ((project.phone.length > 0) ? "<br>" + project.phone : ""));
+			$("#fundedBy").html(project.fundedBy);
+			$("#pic").html((project.pic.length > 0) ? "<img src='" + project.pic  + "'>" : "");
 
+			startLB();
 		},
 		complete: function () {
 
@@ -255,44 +248,81 @@ function initMap() {
 	/* End of var map */
 }
 
-function showProjects(data) {
-	var projects = JSON.parse(data);
+function filterCenter(cid) {
+	if (projectCenter == cid)
+		projectCenter = -1;
+	else
+		projectCenter = cid;
+
+	getProjects();
+}
+
+function getProjects() {
+	$.ajax({
+		type: 'POST',
+		url: '../php/map/filter.php',
+		data: {
+			center: projectCenter,
+			type: projectType,
+			status: projectStatus,
+			start: startDate,
+			end: endDate
+		},
+		dataType: "json",
+		success: showProjects
+	});
+}
+
+function showProjects(projects) {
 	console.log(projects);
 	$('#list').html('');
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+	markers = [];
+	if (markerCluster != null)
+		markerCluster.clearMarkers();
+	iWindows = [];
 	/* Marker creation dependant on json */
-	for (var i = 0; i < projects.length; ++i) {
-		var project = projects[i];
-		var content = '<a class="mdl-navigation__link" href="">' + project.title+ '</a>';
-		$(content).appendTo('#list');
-		//$('#list').html(content);
-		var latLng = new google.maps.LatLng(project.lat,
-            project.lng);
-		var iWindow = new google.maps.InfoWindow({ //create infow windows for each marker
-			position: latLng,
-			content: project.title
-		});
-		var marker = new google.maps.Marker({
-			map: map,
-			position: latLng,
-			zIndex: i,
-			// icon: project.center // last element of the array
-		});
-		marker.addListener('click', function () {
-			map.setZoom(12); // zoom into marker position
-			map.setCenter(this.getPosition()); // center map on marker
-			startLB();
-		});
-		marker.addListener('mouseover', function () {
-			iWindow.open(map, this);
-		});
-		marker.addListener('mouseout', function () {
-			iWindow.close();
-		})
-		markers.push(marker);
+	if (projects != null) {
+		for (var i = 0; i < projects.length; ++i) {
+			var project = projects[i];
+			var content = '<a class="mdl-navigation__link" href="">' + project.title + '</a>';
+			$(content).appendTo('#list');
+			//$('#list').html(content);
+			var latLng = new google.maps.LatLng(project.lat,
+	            project.lng);
+			var iWindow = new google.maps.InfoWindow({ //create infow windows for each marker
+				position: latLng,
+				pid: project.pid,
+				content: project.title
+			});
+			iWindows[project.pid] = iWindow;
+			var marker = new google.maps.Marker({
+				map: map,
+				position: latLng,
+				pid: project.pid,
+				icon: pins[project.cid],
+				zIndex: i,
+				// icon: project.center // last element of the array
+			});
+			marker.addListener('click', function () {
+				map.setCenter(this.getPosition()); // center map on marker
+				lightboxPopup(this.pid);
+			});
+			marker.addListener('mouseover', function () {
+				iWindows[this.pid].open(map, this);
+			});
+			marker.addListener('mouseout', function () {
+				iWindows[this.pid].close();
+			})
+			markers.push(marker);
+		}
 	}
 	/* Marker cluster (non-standard markers with numbers) */
 	markerCluster = new MarkerClusterer(map, markers);
-	$("#projectsVisible").html('<a class="navbar-brand" href="#" >' + markers.length + ' projects shown</a>');
+	var projectWord = (markers.length == 1) ? "project" : "projects";
+	$("#projectsVisible").html('<a class="navbar-brand" href="#" >' + markers.length + ' ' + projectWord + ' shown</a>');
 }
 
 
@@ -304,10 +334,6 @@ function startLB() {    // start light box on click
 
 	lbBG.style.display = "block";
 	lbFG.style.display = "block";
-
-	var info = contentString;
-
-	document.getElementById('info1').innerHTML = info;
 }
 
 function dismissLB() {  // dismiss light box on clicking outside
@@ -317,7 +343,28 @@ function dismissLB() {  // dismiss light box on clicking outside
 	lbBG.style.display = "none";
 	lbFG.style.display = "none";
 
-	document.getElementById('info1').innerHTML = "";
+	$("#center").html("");
+	$("#project").html("");
+	$("#date").html("");
+	$("#location").html("");
+	$("#summary").html("");
+	$("#results").html("");
+	$("#learn").html("");
+	$("#contact").html("");
+	$("#fundedBy").html("");
+	$("#pic").html("");
+}
+
+function generatePins() {
+	for (var i = 0; i < centers.length; i++) {
+	    pins[centers[i].cid] = {
+	        path: "m 322.79414,-542.08289 c -76.38702,0 -138.31093,61.92391 -138.31093,138.31093 -1e-5,76.38702 61.92391,138.31094 138.31093,138.31093 76.38702,0 138.31093,-61.92391 138.31092,-138.31093 0,-76.38701 -61.92391,-138.31093 -138.31092,-138.31093 z M 321.14947,-2.9465644 C 269.12522,-58.395774 172.70959,-161.39301 118.25538,-272.49881 103.02015,-302.46983 81.01559,-363.93459 81.497073,-401.8679 83.177089,-534.22679 184.40448,-642.60421 321.19429,-641.56513 c 137.36688,1.04347 242.10368,116.52782 237.83281,240.54469 -1.165,33.82908 -14.68019,92.32469 -33.63168,125.4493 C 439.2483,-118.31222 383.90747,-74.963164 321.14947,-2.9465644 Z",
+	        fillColor: centers[i].color,
+	        fillOpacity: 1,
+	        strokeWeight: 0,
+	        scale: 0.05,
+	   };
+	}
 }
 
 /**

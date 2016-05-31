@@ -23,6 +23,7 @@ if(isset($_POST['btn-login']))
 	 {
 	  //$_SESSION['user'] = $res['uid'];
   	  //$username = $res['firstName'] + $res['lastName'];
+	  $_SESSION['uid'] = $res['uid'];
 	  $_SESSION['logged_in'] = $res['firstName'];
 	  $_SESSION['logged_in2'] = $res['lastName'];
 	  $_SESSION['user_email'] = $res['email'];

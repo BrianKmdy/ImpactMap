@@ -55,7 +55,7 @@
 					echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['firstName'] . " </td>";
 					echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['lastName'] . " </td>";
 					echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['email'] . " </td>";
-					echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['phone'] . " </td>";
+					echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['phone'] . "&nbsp; </td>";
 					echo "</tr>";
 				}
 			?>
