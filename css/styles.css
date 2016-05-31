@@ -106,25 +106,7 @@ html, body {
     background-color: #404040;
 }
 
-@media (max-width: 768px) {
-    .navbar-fixed-bottom {
-        display: none;
-    }
 
-    #banner {
-        display: none;
-    }
-    
-    #search {
-        left: 2%;   
-    }
-}
-
-@media (max-width: 340px) {
-    #filter-icon {
-        display: none;
-    }
-}
 
 /* Search bar under banner */
 #search {
@@ -200,4 +182,23 @@ input[type=text] {
 .modal-content {
     z-index: 1;
     margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+    .navbar-fixed-bottom {
+        display: none;
+    }
+
+    #banner {
+        display: none;
+    }
+    
+    #search {
+        margin-top: 0px;
+        left: 2%;   
+    }
+    
+    .mdl-layout__title, .mdl-layout-title {
+    font-size: 1.5em;
+    }
 }
