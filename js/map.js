@@ -380,3 +380,8 @@ function generatePins() {
 function printCallback(data) {
     console.log(data);
 }
+
+
+function toggleSideBar() {
+    $('.mdl-layout__drawer-button').click();
+}
