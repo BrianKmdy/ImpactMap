@@ -124,23 +124,37 @@
                         </div>
                         <div class="modal-body">
                             <form>
+                            	<label for="recipient-name" class="control-label">Centers:</label>
                                 <div class="form-group">
-                                    <label for="recipient-name" class="control-label">Centers:</label>
-                                    <select class="form-control form-control-lg" id="centerList">
+                                    <select class="col-md-4" id="centerList">
                                         <option selected>Names of Centers</option>
                                         
                                     </select>
                                     
                                 </div>
-                             
+                                <br>
+                             	<label for="dates" class="control-label">Start Date:</label>
                                 <div class="form-group">
-                                	<label for="dates" class="control-label">Dates:</label>
-                                    <div class="input-daterange input-group" id="datepicker">
-                                        <input type="text" class="input-sm form-control" name="start" />
-                                        <span class="input-group-addon">to</span>
-                                        <input type="text" class="input-sm form-control" name="end" />
+              
+                                    <div class = "col-md-6" id="datepicker">
+                                        <input type="date" class = "col-md-6" name="start-date" />
                                     </div>
+
+                                 
+
+                                 </div>
+                                 <br>
+                                 <label for="dates2" class="control-label">End Date:</label> 
+                                 <div class ="form-group">  
+                                      
+                                    <div class="col-md-6" id="datepicker2">
+                                        <input type="date" class = "col-md-6" name="end-date" id="datepicker2" />
+                                    </div>
+
                                 </div>
+
+                                <br>
+
                                 <div class="form-group">
                                     <label for="status-name" class="control-label">Project Status:</label>
                                     <div class="radio">
@@ -179,14 +193,9 @@
             <!-- Navbar fixed bottom -->
             <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#"># of Markers Visible</a>
+                    <div class="navbar-header" id="projectsVisible">
                     </div>
                     <div class="navbar-collapse collapse">
-                        <!-- Left nav -->
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Link</a></li>
-                        </ul>
                         <!-- Right nav -->
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Center</a></li>

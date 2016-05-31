@@ -292,6 +292,7 @@ function showProjects(data) {
 	}
 	/* Marker cluster (non-standard markers with numbers) */
 	markerCluster = new MarkerClusterer(map, markers);
+	$("#projectsVisible").html('<a class="navbar-brand" href="#" >' + markers.length + ' projects shown</a>');
 }
 
 
