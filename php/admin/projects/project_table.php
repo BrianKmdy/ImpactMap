@@ -53,7 +53,7 @@
 					if ($projects[$i]['visible'] == FALSE)
 						echo "style='opacity: 0.1;'";
 
-					$projects[$i]['title'] = strlen($projects[$i]['title']) > 25 ? substr($projects[$i]['title'],0,20)."..." : $projects[$i]['title'];
+					$projects[$i]['title'] = strlen($projects[$i]['title']) > 25 ? substr($projects[$i]['title'],0,25)."..." : $projects[$i]['title'];
 					echo "></span></td>";
 					echo "<td class='clickable col-xs-2 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['title'] . " </td>";
 
@@ -61,8 +61,8 @@
 					echo "<td class='clickable col-xs-1 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $STATUS[$projects[$i]['status']] . " </td>";
 					echo "<td class='clickable col-xs-1 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['startDate'] . " </td>";
 
-					$projects[$i]['summary'] = strlen($projects[$i]['summary']) > 25 ? substr($projects[$i]['summary'],0,20)."..." : $projects[$i]['summary'];
-					echo "<td class='clickable col-xs-5' onclick=editProject(" . $projects[$i]['pid'] . ")> " . substr($projects[$i]['summary'], 0, 120) . "..." . " </td>";
+					$projects[$i]['summary'] = strlen($projects[$i]['summary']) > 150 ? substr($projects[$i]['summary'],0,150)."..." : $projects[$i]['summary'];
+					echo "<td class='clickable col-xs-5' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['summary'] . " </td>";
 					echo "</tr>";
 				}
 			?>

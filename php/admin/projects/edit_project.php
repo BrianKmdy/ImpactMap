@@ -22,9 +22,6 @@
     $project = $map -> load_project_details($pid);
 ?>
 
-<link  href="../../../lib/cropper/dist/cropper.css" rel="stylesheet">
-<script src="../../../lib/cropper/dist/cropper.js"></script>
-
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -35,9 +32,6 @@
             <div id="invalidInputWarning">
             </div>
             <?php
-                echo '<div class="form-group" id="titleGroup">';
-                echo '<label>Title: </label><input type="text" class="form-control" id="title" name="title" value="' . $project['title'] . '">';
-                echo '</div>';
                 echo '<label>Center: </label><select type="text" class="form-control" id="cid" name="cid">';
                 // Populate the list of centers
                 $centers = $map->load_centers();
@@ -48,6 +42,9 @@
                     echo ">" . $centers[$i]['name'] . " (" . $centers[$i]['acronym'] . ")</option>";
                 }
                 echo '</select>';
+                echo '<div class="form-group" id="titleGroup">';
+                echo '<label>Title: </label><input type="text" class="form-control" id="title" name="title" value="' . $project['title'] . '">';
+                echo '</div>';
                 echo '<label>Status: </label><select type="text" class="form-control" id="status" name="status">';
                 for ($i = 0; $i < count($STATUS); $i++) {
                     echo "<option value='" . $i . "'";
@@ -59,7 +56,9 @@
                 echo '<div class="form-group" id="startDateGroup">';
                 echo '<label>Start Date: </label><input type="text" class="form-control" id="startDate" name="startDate" value="' . $project['startDate'] . '">';
                 echo '</div>';
+                echo '<div class="form-group" id="endDateGroup">';
                 echo '<label>End Date: </label><input type="text" class="form-control" id="endDate" name="endDate" value="' . $project['endDate'] . '">';
+                echo '</div>';
                 echo '<label>Building Name: </label><input type="text" class="form-control" id="buildingName" name="buildingName" value="' . $project['buildingName'] . '">';
                 echo '<div class="form-group" id="addressGroup">';
                 echo '<label>Address: </label><input type="text" class="form-control" id="address" name="address" value="' . $project['address'] . '">';
@@ -86,17 +85,7 @@
                 echo '<label>Results: </label><textarea class="form-control" id="results"  name="results" rows="10">' . $project['results'] . '</textarea>';
                 echo '</div>';
                 echo '<label>Link: </label><input type="text" class="form-control" id="link" name="link" value="' . $project['link'] . '">';
-                echo '<div class="form-group" id="pictureGroup">';
 
-                if (!empty($project['pic'])) {      //There is already a picture associated with this project
-                    echo '<a class="btn btn-primary" target="_blank" href="' . $project['pic'] . '">View Picture</a>';
-                    echo '<a class="btn btn-primary" href="delete_picture.php?pid=' . $pid . '">Delete Picture</a>';
-                }
-                echo '<label>Picture upload: </label><input type="file" class="form-control-file" id="pic" name="pic">';
-
-                echo '</div>';
-                echo '<div class="col-md-12"><img id="upload-preview" src="#" style="display:none; max-width:100%; max-height:100%;"></div>';
-                //echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $project['pic'] . '">';
 
                 echo '<label>Contact: </label><select type="text" class="form-control" id="conid" name="conid">';
                 $contacts = $map->load_contacts();
@@ -110,6 +99,17 @@
                 echo '<div class="form-group" id="fundedByGroup">';
                 echo '<label>Funded by: </label><input type="text" class="form-control" id="fundedBy" name="fundedBy" value="' . $project['fundedBy'] . '">';
                 echo '</div>';
+                echo '<div class="form-group" id="pictureGroup">';
+
+                if (!empty($project['pic'])) {      //There is already a picture associated with this project
+                    echo '<a class="btn btn-primary" target="_blank" href="' . $project['pic'] . '">View Picture</a>';
+                    echo '<a class="btn btn-primary" href="delete_picture.php?pid=' . $pid . '">Delete Picture</a>';
+                }
+                echo '<label>Picture upload: </label><input type="file" class="form-control-file" id="pic" name="pic">';
+
+                echo '</div>';
+                echo '<div class="col-md-12"><img id="upload-preview" src="#" style="display:none; max-width:100%; max-height:100%;"></div>';
+                //echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $project['pic'] . '">';
                 echo '<label>Keywords: </label><input type="text" class="form-control" id="keywords" name="keywords" value="' . $project['keywords'] . '">';
                 echo '<label>Visibility: </label><select type="text" class="form-control" id="visible" name="visible">';
                 if ($project['visible'] == 1) {
@@ -135,34 +135,3 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
-
-<script>
-    $('#pic').change(function() {
-        readURL(this);
-        $('#upload-preview').show();
-    });
-    $('#upload-preview').cropper({
-        aspectRatio: 16 / 9,
-        crop: function(e) {
-            // Output the result data for cropping image.
-            console.log(e.x);
-            console.log(e.y);
-            console.log(e.width);
-            console.log(e.height);
-            console.log(e.rotate);
-            console.log(e.scaleX);
-            console.log(e.scaleY);
-        }
-    });
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#upload-preview').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>

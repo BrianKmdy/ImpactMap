@@ -1,7 +1,5 @@
 <?php 
-
     require_once "check_authenticated.php"; 
-
 ?>
 
 <div class="panel panel-default">
@@ -44,19 +42,21 @@
 				$users = $map -> load_users();
 
 				for ($i = 0; $i < count($users); $i++) {
-					echo "<tr>";
-					echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $users[$i]['uid'] . "'></td>";	
-					echo "<td class='clickable col-xs-1' onclick=editUser(" . $users[$i]['uid'] . ")><span aria-hidden='true' ";
-					if ($users[$i]['authenticated'] == TRUE)
-						echo "class='glyphicon glyphicon-ok auth'";
-					else
-						echo "class='glyphicon glyphicon-remove notauth'";
-					echo "></span></td>";		
-					echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['firstName'] . " </td>";
-					echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['lastName'] . " </td>";
-					echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['email'] . " </td>";
-					echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['phone'] . "&nbsp; </td>";
-					echo "</tr>";
+					if ($users[$i]['uid'] != $_SESSION['uid']) {
+						echo "<tr>";
+						echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $users[$i]['uid'] . "'></td>";	
+						echo "<td class='clickable col-xs-1' onclick=editUser(" . $users[$i]['uid'] . ")><span aria-hidden='true' ";
+						if ($users[$i]['authenticated'] == TRUE)
+							echo "class='glyphicon glyphicon-ok auth'";
+						else
+							echo "class='glyphicon glyphicon-remove notauth'";
+						echo "></span></td>";		
+						echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['firstName'] . " </td>";
+						echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['lastName'] . " </td>";
+						echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['email'] . " </td>";
+						echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['phone'] . "&nbsp; </td>";
+						echo "</tr>";
+					}
 				}
 			?>
 		</tbody>

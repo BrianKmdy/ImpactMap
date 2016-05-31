@@ -950,7 +950,7 @@ class Map {
         $filters = array_merge($defaults, $filters);
 
         $results = NULL;
-        $sql = "SELECT pid, lat, lng, title, cid FROM Projects WHERE visible = true AND
+        $sql = "SELECT pid, lat, lng, title, cid, type, address FROM Projects WHERE visible = true AND
                   cid >= :cid_low AND cid <= :cid_hi AND
                   status >= :status_low AND status <= :status_hi AND
                   type >= :type_low AND type <= :type_hi AND

@@ -212,13 +212,14 @@ function validateProjectData(){
 
     $("#titleGroup").removeClass("has-error");
     $("#startDateGroup").removeClass("has-error");
+    $("#endDateGroup").removeClass("has-error");
     $("#addressGroup").removeClass("has-error");
     $("#zipGroup").removeClass("has-error");
     $("#summaryGroup").removeClass("has-error");
     $("#resultsGroup").removeClass("has-error");
     $("#fundedByGroup").removeClass("has-error");
 
-    var dateRegex = /^(20[0-9]{2})-(0[1-9]{1}|[1-9]{1}|1[1-2]{1})-([1-9]{1}|[1-3]{1}[1-9]{1})$/;
+    var dateRegex = /^(20[0-9]{2})-([1-9]{1}|[1-9]{1}|1[1-2]{1})-([1-9]{1}|[1-3]{1}[1-9]{1})$/;
 
     if ($("#title").val().length < 1) 
     {
@@ -235,6 +236,13 @@ function validateProjectData(){
             string = string.concat("<li><b>Start Date</b> cannot be empty</li>");
         else
             string = string.concat("<li><b>Start Date</b> must be of the form yyyy-mm-dd</li>");
+    }
+    if ($("#endDate").val().length > 0) {
+        if (!dateRegex.test($("#endDate").val())) {
+            $("#endDateGroup").addClass("has-error");
+            validInput = false;
+            string = string.concat("<li><b>End Date</b> must be of the form yyyy-mm-dd</li>");
+        }
     }
 
     if($("#address").val().length < 1)
@@ -281,17 +289,7 @@ function validateProjectData(){
     }
     else
         return true;
-
-
 }
-
-function isValidDate(date) {
-    if (Date.parse(date) == NaN)
-        return false;
-    else
-        return true;
-}
-
 /**
 * Called when a user is done making changes to a project and wishes to submit it. All the data is captured from the form and sent to submit_project_edit.php
 *
@@ -687,7 +685,7 @@ function validateContactData(){
         string = string.concat("<li><b>Email</b> cannot be empty</li>");
     }
 
-    var phoneRegex = /^(([0-9]{10})|([0-9]{11})|([0-9]{12}))/;
+    var phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/;
 
     if ($("#phone").val().length < 1 || !phoneRegex.test($("#phone").val())) 
     {
@@ -803,7 +801,6 @@ function updateProfile() {
 }
 
 function submitUpdateProfile() {
-    console.log("tacos: " + $("#phone").val());
     // Ajax request to submit the data to the server
     $.ajax({
         type: "POST",
