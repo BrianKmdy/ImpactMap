@@ -169,8 +169,8 @@
                              	<label for="dates" class="control-label">Start Date:</label>
                                 <div class="form-group">
               
-                                    <div class = "col-md-6" id="datepicker">
-                                        <input type="date" class = "col-md-6" name="start-date" />
+                                    <div class = "col-md-6">
+                                        <input type="date" class = "col-md-6" name="start-date" id="datepicker"/>
                                     </div>
 
                                  
@@ -180,7 +180,7 @@
                                  <label for="dates2" class="control-label">End Date:</label> 
                                  <div class ="form-group">  
                                       
-                                    <div class="col-md-6" id="datepicker2">
+                                    <div class="col-md-6">
                                         <input type="date" class = "col-md-6" name="end-date" id="datepicker2" />
                                     </div>
 
@@ -189,21 +189,29 @@
                                 <br>
 
                                 <div class="form-group">
-                                    <label for="status-name" class="control-label">Project Status:</label>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>Completed
-                                        </label>
+                                    <label for="recipient-name" class="control-label">Status:</label>
+                                    <div class="form-group">
+                                        <select class="col-md-4" id="statusList">
+                                            <option value="-1">All</option>
+                                            <option value="0">Planned</option>
+                                            <option value="1">Ongoing</option>
+                                            <option value="2">Completed</option>
+                                        </select>
                                     </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="exampleRadios" id="exampleRadios2" value="option2">Ongoing
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="exampleRadios" id="exampleRadios3" value="option3">Anticipated
-                                        </label>
+                                </div>
+                                
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="control-label">Type:</label>
+                                    <div class="form-group">
+                                        <select class="col-md-4" id="typeList">
+                                            <option value="-1">All</option>
+                                            <option value="0">Research</option>
+                                            <option value="1">Audit</option>
+                                            <option value="2">Demonstration</option>
+                                            <option value="2">Other</option>
+                                        </select>
                                     </div>
                                 </div>
                             </form>

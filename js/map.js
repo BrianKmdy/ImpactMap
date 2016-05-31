@@ -100,12 +100,14 @@ $(document).ready(function () {
 	});
 
 	$('#filter-button').click(function (event) {
+		console.log('here');
+		console.log($('#centers').val());
 		event.preventDefault();                         //Prevents button default event
-		projectCenter = $('#centers').val();        //Default: -1 (all)
-		projectType = $('#project-type').val();     //Default: -1 (all)
-		projectStatus = $("#project-status").val(); //Default: -1 (all)
-		startDate = $('#start-date').val();         //Default: empty (all)
-		endDate = $('#end-date').val();             //Default: empty (all)
+		projectCenter = $('#centerList').val();        //Default: -1 (all)
+		projectType = $('#typeList').val();     //Default: -1 (all)
+		projectStatus = $("#statusList").val(); //Default: -1 (all)
+		startDate = $('#datepicker').val();         //Default: empty (all)
+		endDate = $('#datepicker2').val();             //Default: empty (all)
 
 		getProjects();
 	});
