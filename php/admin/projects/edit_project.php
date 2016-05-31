@@ -135,3 +135,21 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+
+<script>
+    $('#pic').change(function() {
+        readURL(this);
+        $('#upload-preview').show();
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#upload-preview').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
