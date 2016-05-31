@@ -244,7 +244,6 @@ function validateProjectData(){
             string = string.concat("<li><b>End Date</b> must be of the form yyyy-mm-dd</li>");
         }
     }
-
     if($("#address").val().length < 1)
     {
         $("#addressGroup").addClass("has-error");
@@ -801,6 +800,10 @@ function updateProfile() {
 }
 
 function submitUpdateProfile() {
+    if (!validateProfileData())
+        return;
+
+
     // Ajax request to submit the data to the server
     $.ajax({
         type: "POST",
@@ -815,6 +818,60 @@ function submitUpdateProfile() {
             loadProfile();
         }
     });
+}
+
+function validateProfileData()
+{
+    var validInput = true;
+    var string = "<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Invalid input:<br><ul> ";
+
+    $("#emailGroup").removeClass("has-error");
+    $("#phoneGroup").removeClass("has-error");
+    $("#newPassword1Group").removeClass("has-error");
+    $("#newPassword2Group").removeClass("has-error");
+
+    if ($("#email").val().length < 1) 
+    {
+        $("#nameGroup").addClass("has-error");
+        validInput = false;
+        string = string.concat("<li><b>Name</b> cannot be empty</li>");
+    }
+    
+    var phoneRegex = /^(([0-9]{10})|([0-9]{11})|([0-9]{12}))/;
+
+    if ($("#phone").val().length < 1 || !phoneRegex.test($("#phone").val())) 
+    {
+        $("#phoneGroup").addClass("has-error");
+        validInput = false;
+        if($("#phone").val().length < 1)
+            string = string.concat("<li><b>Phone</b> cannot be empty</li>");
+        else
+            string = string.concat("<li><b>Phone</b> must have atleast 10 digits</li>");
+    }
+
+    if (strcmp($("#newPassword1").val(), $("#newPassword2").val()) !== 0) 
+    {
+        $("#newPassword1Group").addClass("has-error");
+        validInput = false;
+        string = string.concat("<li><b>New Passwords</b> do not match</li>");
+    }
+
+    if ($("#newPassword1").val().length > 1 && $("#newPassword1").val().length < 6) 
+    {
+        $("#nameGroup").addClass("has-error");
+        validInput = false;
+        string = string.concat("<li><b>New Passwords</b> must be greater than 6 characters</li>");
+    }
+
+    string = string.concat("</ul></div>");
+
+    if (!validInput) {
+        $("#invalidInputWarning").html(string);
+
+        return false;
+    }
+    else
+        return true;
 }
 
 /**
