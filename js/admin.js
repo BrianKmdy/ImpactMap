@@ -312,7 +312,6 @@ function submitEditProject(pid) {
         stemmer.stem();
         words[i] = stemmer.getCurrent();
     });
-    console.log(searchWords);
 
     // Ajax request to submit the data to the server
     $.ajax({
@@ -341,7 +340,6 @@ function submitEditProject(pid) {
                lng: marker.getPosition().lng()},
         data_type: "json",
         success: function (data) {
-            printCallback(data);
             loadProjects();
         }
     });
@@ -363,7 +361,6 @@ function updateProjects(func) {
         data: {func: func,
                data: JSON.stringify(projects)}, 
         success: function (data) {
-            console.log(data);
             loadProjects();
         }
     });
@@ -485,8 +482,7 @@ function restoreHistory() {
     $.ajax({
         type: "POST",
         url: "php/admin/history/restore_history.php",
-        data: {data: JSON.stringify(projects)},
-        success: printCallback
+        data: {data: JSON.stringify(projects)}
     });
 }
 
@@ -498,8 +494,7 @@ function restoreWholeTable() {
     $.ajax({
         type: "POST",
         url: "php/admin/history/restore_all_history.php",
-        data: {data: $("#datetimepicker").val()},
-        success: printCallback
+        data: {data: $("#datetimepicker").val()}
     });
 }
 
@@ -647,8 +642,6 @@ function submitEditContact(conid) {
     if (!validateContactData())
         return;
 
-
-    console.log('test');
     $.ajax({
         type: "POST",
         url: "php/admin/contacts/submit_contact_edit.php",
@@ -817,7 +810,6 @@ function submitUpdateProfile() {
                newPassword2: $("#newPassword2").val()},
         data_type: "json",
         success: function (data) {
-            printCallback(data);
             loadProfile();
         }
     });

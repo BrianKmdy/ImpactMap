@@ -58,7 +58,6 @@ $(document).ready(function () {
 					stemmer.stem();
 					words[i] = stemmer.getCurrent();
 				});
-				console.log(searchWords.join(" "));
 
 				// Send the search terms to the server and print any matches
 				$.ajax({
@@ -70,6 +69,8 @@ $(document).ready(function () {
 						showProjects(JSON.parse(data));
 					}
 				});
+
+				toggleSideBar();
 			} else {
 				getProjects();
 			}
@@ -100,8 +101,6 @@ $(document).ready(function () {
 	});
 
 	$('#filter-button').click(function (event) {
-		console.log('here');
-		console.log($('#centers').val());
 		event.preventDefault();                         //Prevents button default event
 		projectCenter = $('#centerList').val();        //Default: -1 (all)
 		projectType = $('#typeList').val();     //Default: -1 (all)
@@ -115,7 +114,6 @@ $(document).ready(function () {
 
 //Shows lightbox, call this function when map marker is clicked. Parameters is the project ID
 function lightboxPopup(pid) {
-	console.log(pid);
 	$.ajax({
 		type: 'POST',
 		url: '../php/map/get_project.php',
@@ -279,7 +277,6 @@ function getProjects() {
 }
 
 function showProjects(projects) {
-	console.log(projects);
 	$('#list').html('');
 	for (var i = 0; i < markers.length; i++) {
 		markers[i].setMap(null);
@@ -370,16 +367,6 @@ function generatePins() {
 	   };
 	}
 }
-
-/**
-* Print any callback data passed after an ajax call
-*
-* @param data The data to be printed
-*/
-function printCallback(data) {
-    console.log(data);
-}
-
 
 function toggleSideBar() {
     $('.mdl-layout__drawer-button').click();

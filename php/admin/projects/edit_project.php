@@ -102,10 +102,6 @@
                 <input type="text" class="form-control" id="fundedBy" name="fundedBy" value=<?php echo '"' . $project['fundedBy'] . '"'; ?>>
             </div>
             <div class="form-group" id="pictureGroup">
-                <?php if (!empty($project['pic'])): ?> 
-                    <a class="btn btn-primary" target="_blank" href=<?php echo '"' . $project['pic'] . '"'; ?>>View Picture</a>
-                    <a class="btn btn-primary" href=<?php echo '"delete_picture.php?pid=' . $pid . '"'; ?>>Delete Picture</a>
-                <?php endif; ?>
                 <label>Picture upload: </label>
                 <input type="file" class="form-control-file" id="pic" name="pic">
             </div>
@@ -135,21 +131,3 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
-
-<script>
-    $('#pic').change(function() {
-        readURL(this);
-        $('#upload-preview').show();
-    });
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#upload-preview').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>

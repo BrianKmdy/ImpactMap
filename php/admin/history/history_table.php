@@ -62,7 +62,7 @@
 				<td class='col-xs-1 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $history[$i]['acronym']; ?></td>
 				<td class='col-xs-2 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $STATUS[$history[$i]['status']]; ?></td>
 				<td class='col-xs-2 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $history[$i]['startDate']; ?></td>
-				<td class='col-xs-3 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo strlen($history[$i]['summary']) > 150 ? substr($history[$i]['summary'],0,150)."..." : $history[$i]['summary']; ?></td>
+				<td class='col-xs-3 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo strlen($history[$i]['summary']) > 100 ? substr($history[$i]['summary'],0,100)."..." : $history[$i]['summary']; ?></td>
 				</tr>
 			<?php endfor; ?>
 		</tbody>
