@@ -3,13 +3,14 @@
 ### Requirements
 
 - MySQL database
-    - **Username**: root
-    - **Password**: root
+    - **Username**: root (NEEDS TO BE CHANGED! /php/common/constants.inc.php)
+    - **Password**: root (NEEDS TO BE CHANGED! /php/common/constants.inc.php)
     - **Database**: ImpactMap
     - **Tables** (Details listed farther below):
         - Projects
         - History
         - Centers
+        - Contacts
         - Users
 - Webserver with PHP
 
@@ -56,25 +57,24 @@ The SQL definitions for the tables are as follows:
 ```SQL
 CREATE TABLE Projects (
 	pid INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	cid INT,
+	cid INT UNSIGNED,
 	title VARCHAR(100),
 	status INT,
-	startDate VARCHAR(20),
-	endDate VARCHAR(20),
+	startDate DATE,
+	endDate DATE,
 	buildingName VARCHAR(100),
 	address VARCHAR(100),
 	zip VARCHAR(6),
 	type int,
 	summary TEXT,
+	results TEXT,
 	link VARCHAR(200),
 	pic VARCHAR(200),
-	contactName VARCHAR(100),
-	contactEmail VARCHAR(100),
-	contactPhone VARCHAR(16),
+	conid INT UNSIGNED,
 	fundedBy VARCHAR(100),
 	keywords VARCHAR(100),
 	stemmedSearchText TEXT,
-	visible BOOLEAN,
+	visible BOOLEAN NOT NULL DEFAULT FALSE,
 	lat REAL,
 	lng REAL,
 	FULLTEXT(stemmedSearchText)
@@ -82,28 +82,28 @@ CREATE TABLE Projects (
 
 CREATE TABLE History (
 	hid INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	time TIMESTAMP,
-	pid INT,
-	cid INT,
+	time DATETIME NOT NULL DEFAULT '2016-06-01 00:00:00',
+	deleted DATETIME NOT NULL DEFAULT '3000-01-01 00:00:00',
+	editedBy INT UNSIGNED,
+	pid INT UNSIGNED,
+	cid INT UNSIGNED,
 	title VARCHAR(100),
 	status INT,
-	startDate VARCHAR(20),
-	endDate VARCHAR(20),
+	startDate DATE,
+	endDate DATE,
 	buildingName VARCHAR(100),
 	address VARCHAR(100),
 	zip VARCHAR(6),
 	type int,
 	summary TEXT,
+	results TEXT,
 	link VARCHAR(200),
 	pic VARCHAR(200),
-	contactName VARCHAR(100),
-	contactEmail VARCHAR(100),
-	contactPhone VARCHAR(16),
+	conid INT UNSIGNED,
 	fundedBy VARCHAR(100),
-	keyWords VARCHAR(100),
+	keywords VARCHAR(200),
 	stemmedSearchText TEXT,
-	visible BOOLEAN,
-	deleted BOOLEAN,
+	visible BOOLEAN NOT NULL DEFAULT FALSE,
 	lat REAL,
 	lng REAL
 );
@@ -115,14 +115,27 @@ CREATE TABLE Centers (
 	color CHAR(7)
 );
 
+CREATE TABLE Contacts (
+	conid INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(100),
+	email VARCHAR(100),
+	phone VARCHAR(16)
+);
+
 CREATE TABLE Users (
 	uid INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	email VARCHAR(64),
+	email VARCHAR(100),
+	firstName VARCHAR(100),
+	lastName VARCHAR(100),
+	phone VARCHAR(16),
 	password VARCHAR(64),
-	root BOOLEAN,
-	admin BOOLEAN,
-	cas BOOLEAN
+	authenticated BOOLEAN NOT NULL DEFAULT FALSE,
+	root BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE TRIGGER `defaultTime` BEFORE INSERT ON  `History` 
+FOR EACH ROW 
+SET NEW.time = NOW();
 ```
 ### Third-party libraries used
 - Jquery
