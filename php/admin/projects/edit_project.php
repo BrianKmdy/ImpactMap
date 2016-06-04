@@ -58,7 +58,7 @@
             </div>
             <div class="form-group" id="endDateGroup">
                 <label>End Date: </label>
-                <input type="text" class="form-control" id="endDate" name="endDate" value=<?php echo '"' . $project['endDate'] . '"'; ?>>
+                <input type="text" class="form-control" id="endDate" name="endDate" value=<?php if ($project['endDate'] != '0000-00-00') echo '"' . $project['endDate'] . '"'; ?>>
             </div>
             <label>Building Name: </label>
             <input type="text" class="form-control" id="buildingName" name="buildingName" value=<?php echo '"' . $project['buildingName'] . '"'; ?>>
