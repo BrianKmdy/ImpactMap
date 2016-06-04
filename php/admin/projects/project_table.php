@@ -42,30 +42,21 @@
 				require_once "../../common/dbConnect.php";
 				require_once "../../common/class.map.php";
 
-				$map = new Map();
-
+				$map = new Map();	
 				$projects = $map -> load_projects_full();
-
-				for ($i = 0; $i < count($projects); $i++) {
-					echo "<tr>";
-					echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $projects[$i]['pid'] . "'></td>";
-					echo "<td class='clickable col-xs-1' onclick=editProject(" . $projects[$i]['pid'] . ")><span class='glyphicon glyphicon-eye-open' aria-hidden='true' ";
-					if ($projects[$i]['visible'] == FALSE)
-						echo "style='opacity: 0.1;'";
-
-					$projects[$i]['title'] = strlen($projects[$i]['title']) > 25 ? substr($projects[$i]['title'],0,25)."..." : $projects[$i]['title'];
-					echo "></span></td>";
-					echo "<td class='clickable col-xs-2 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['title'] . " </td>";
-
-					echo "<td class='clickable col-xs-1 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['acronym'] . " </td>";
-					echo "<td class='clickable col-xs-1 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $STATUS[$projects[$i]['status']] . " </td>";
-					echo "<td class='clickable col-xs-1 text-nowrap' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['startDate'] . " </td>";
-
-					$projects[$i]['summary'] = strlen($projects[$i]['summary']) > 150 ? substr($projects[$i]['summary'],0,150)."..." : $projects[$i]['summary'];
-					echo "<td class='clickable col-xs-5' onclick=editProject(" . $projects[$i]['pid'] . ")> " . $projects[$i]['summary'] . " </td>";
-					echo "</tr>";
-				}
 			?>
+
+			<?php for ($i = 0; $i < count($projects); $i++): ?>
+				<tr>
+				<td class='col-xs-1'><input type='checkbox' class='delete' id=<?php echo "'" . $projects[$i]['pid'] . "'"; ?>></td>
+				<td class='clickable col-xs-1' onclick=editProject(<?php echo $projects[$i]['pid']; ?>)><span class='glyphicon glyphicon-eye-open' aria-hidden='true' <?php if ($projects[$i]['visible'] == FALSE) echo "style='opacity: 0.1;'"; ?>></span></td>
+				<td class='clickable col-xs-2' onclick=editProject(<?php echo $projects[$i]['pid']; ?>)> <?php echo strlen($projects[$i]['title']) > 25 ? substr($projects[$i]['title'],0,25) . "..." : $projects[$i]['title']; ?> </td>
+				<td class='clickable col-xs-1' onclick=editProject(<?php echo $projects[$i]['pid']; ?>)> <?php echo $projects[$i]['acronym']; ?> </td>
+				<td class='clickable col-xs-1' onclick=editProject(<?php echo $projects[$i]['pid']; ?>)> <?php echo $STATUS[$projects[$i]['status']]; ?> </td>
+				<td class='clickable col-xs-1' onclick=editProject(<?php echo $projects[$i]['pid']; ?>)> <?php echo $projects[$i]['startDate']; ?> </td>
+				<td class='clickable col-xs-5' onclick=editProject(<?php echo $projects[$i]['pid']; ?>)> <?php echo strlen($projects[$i]['summary']) > 150 ? substr($projects[$i]['summary'],0,150) . "..." : $projects[$i]['summary']; ?> </td>
+				</tr>
+			<?php endfor; ?>
 		</tbody>
 	</table>
 </div>

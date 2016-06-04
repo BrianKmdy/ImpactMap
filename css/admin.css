@@ -1,6 +1,6 @@
 #projectPickerMap {
-	margin: 20px 30px 20px 30px;
-	width: calc(100% - 60px);
+	margin: 20px 10px 20px 10px;
+	width: calc(100% - 20px);
 	height: 30%;
 	border: 1px solid #cccccc;
 }

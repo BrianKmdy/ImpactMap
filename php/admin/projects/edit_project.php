@@ -20,6 +20,8 @@
         $pid = intval($_POST['pid']);
 
     $project = $map -> load_project_details($pid);
+    $centers = $map->load_centers();
+    $contacts = $map->load_contacts();
 ?>
 
 <div class="modal-dialog">
@@ -29,109 +31,107 @@
             <h4 class="modal-title">Add/Edit Project</h4>
         </div>
         <div class="modal-body">
-            <div id="invalidInputWarning">
+            <div id="invalidInputWarning"></div>
+            <label>Center: </label>
+            <select type="text" class="form-control" id="cid" name="cid">
+                <?php for ($i = 0; $i < count($centers); $i++): ?>
+                    <option value=<?php echo '"' . $centers[$i]['cid'] . '"'; if ($centers[$i]['cid'] == $project['cid']) echo ' selected="selected"'; ?>>
+                        <?php echo $centers[$i]['name'] . " (" . $centers[$i]['acronym'] . ")"; ?>
+                    </option>
+                <?php endfor; ?>
+            </select>
+            <div class="form-group" id="titleGroup">
+                <label>Title: </label>
+                <input type="text" class="form-control" id="title" name="title" value=<?php echo '"' . $project['title'] . '"'; ?>>
             </div>
-            <?php
-                echo '<label>Center: </label><select type="text" class="form-control" id="cid" name="cid">';
-                // Populate the list of centers
-                $centers = $map->load_centers();
-                for ($i = 0; $i < count($centers); $i++) {
-                    echo "<option value='" . $centers[$i]['cid'] ."'";
-                    if ($centers[$i]['cid'] == $project['cid'])
-                        echo "selected='selected'";
-                    echo ">" . $centers[$i]['name'] . " (" . $centers[$i]['acronym'] . ")</option>";
-                }
-                echo '</select>';
-                echo '<div class="form-group" id="titleGroup">';
-                echo '<label>Title: </label><input type="text" class="form-control" id="title" name="title" value="' . $project['title'] . '">';
-                echo '</div>';
-                echo '<label>Status: </label><select type="text" class="form-control" id="status" name="status">';
-                for ($i = 0; $i < count($STATUS); $i++) {
-                    echo "<option value='" . $i . "'";
-                    if ($i == $project['status'])
-                        echo "selected='selected'";
-                    echo ">" . $STATUS[$i] . "</option>";
-                }
-                echo "</select>";
-                echo '<div class="form-group" id="startDateGroup">';
-                echo '<label>Start Date: </label><input type="text" class="form-control" id="startDate" name="startDate" value="' . $project['startDate'] . '">';
-                echo '</div>';
-                echo '<div class="form-group" id="endDateGroup">';
-                echo '<label>End Date: </label><input type="text" class="form-control" id="endDate" name="endDate" value="' . $project['endDate'] . '">';
-                echo '</div>';
-                echo '<label>Building Name: </label><input type="text" class="form-control" id="buildingName" name="buildingName" value="' . $project['buildingName'] . '">';
-                echo '<div class="form-group" id="addressGroup">';
-                echo '<label>Address: </label><input type="text" class="form-control" id="address" name="address" value="' . $project['address'] . '">';
-                echo '</div>';
-                echo '<div class="form-group" id="zipGroup">';
-                echo '<label>Zip Code: </label><input type="text" class="form-control" id="zip" name="zip" value="' . $project['zip'] . '">';
-                echo '</div>';
-                echo '<div id="projectPickerMap"></div>';
+            <label>Status: </label>
+            <select type="text" class="form-control" id="status" name="status">
+                <?php for ($i = 0; $i < count($STATUS); $i++): ?>
+                    <option value=<?php echo '"' . $i . '"'; if ($i == $project['status']) echo "selected='selected'"; ?>>
+                        <?php echo $STATUS[$i]; ?>
+                    </option>
+                <?php endfor; ?>
+            </select>
+            <div class="form-group" id="startDateGroup">
+                <label>Start Date: </label>
+                <input type="text" class="form-control" id="startDate" name="startDate" value=<?php echo '"' . $project['startDate'] . '"'; ?>>
+            </div>
+            <div class="form-group" id="endDateGroup">
+                <label>End Date: </label>
+                <input type="text" class="form-control" id="endDate" name="endDate" value=<?php echo '"' . $project['endDate'] . '"'; ?>>
+            </div>
+            <label>Building Name: </label>
+            <input type="text" class="form-control" id="buildingName" name="buildingName" value=<?php echo '"' . $project['buildingName'] . '"'; ?>>
+            <div class="form-group" id="addressGroup">
+                <label>Address: </label>
+                <input type="text" class="form-control" id="address" name="address" value=<?php echo '"' . $project['address'] . '"'; ?>>
+            </div>
+            <div class="form-group" id="zipGroup">
+                <label>Zip Code: </label>
+                <input type="text" class="form-control" id="zip" name="zip" value=<?php echo '"' . $project['zip'] . '"'; ?>>
+            </div>
+            <div id="projectPickerMap"></div>
+            <label>Type: </label>
+            <select type="text" class="form-control" id="type" name="type">
+                <?php for ($i = 0; $i < count($TYPE); $i++): ?>
+                    <option value=<?php echo '"' . $i . '"'; if ($i == $project['type']) echo "selected='selected'"; ?>>
+                        <?php echo $TYPE[$i]; ?>
+                    </option>
+                <?php endfor; ?>
+            </select>
+            <div class="form-group" id="summaryGroup">
+                <label>Summary: </label>
+                <textarea class="form-control" id="summary"  name="summary" rows="10"><?php echo $project['summary']; ?></textarea>
+            </div>
+            <div class="form-group" id="resultsGroup">
+                <label>Results: </label>
+                <textarea class="form-control" id="results"  name="results" rows="10"><?php echo $project['results']; ?></textarea>
+            </div>
+            <label>Link: </label>
+            <input type="text" class="form-control" id="link" name="link" value=<?php echo '"' . $project['link'] . '"'; ?>>
+            <label>Contact: </label>
+            <select type="text" class="form-control" id="conid" name="conid">
+                <?php for ($i = 0; $i < count($contacts); $i++): ?>
+                    <option value=<?php echo '"' . $contacts[$i]['conid'] . '"'; if ($contacts[$i]['conid'] == $project['conid']) echo "selected='selected'"; ?>>
+                        <?php echo $contacts[$i]['name']; ?>
+                    </option>
+                <?php endfor; ?>
+            </select>
+            <div class="form-group" id="fundedByGroup">
+                <label>Funded by: </label>
+                <input type="text" class="form-control" id="fundedBy" name="fundedBy" value=<?php echo '"' . $project['fundedBy'] . '"'; ?>>
+            </div>
+            <div class="form-group" id="pictureGroup">
+                <?php if (!empty($project['pic'])): ?> 
+                    <a class="btn btn-primary" target="_blank" href=<?php echo '"' . $project['pic'] . '"'; ?>>View Picture</a>
+                    <a class="btn btn-primary" href=<?php echo '"delete_picture.php?pid=' . $pid . '"'; ?>>Delete Picture</a>
+                <?php endif; ?>
+                <label>Picture upload: </label>
+                <input type="file" class="form-control-file" id="pic" name="pic">
+            </div>
+            <div class="col-md-12">
+                <img id="upload-preview" src="#" style="display:none; max-width:100%; max-height:100%;">
+            </div>
+            <label>Keywords: </label>
+            <input type="text" class="form-control" id="keywords" name="keywords" value=<?php echo '"' . $project['keywords'] . '"'; ?>>
+            <label>Visibility: </label>
+            <select type="text" class="form-control" id="visible" name="visible">
+                <?php if ($project['visible'] == 1): ?>
+                    <option value='1' selected='selected'>Shown</option>
+                    <option value='0'>Hidden</option>
+                <?php else: ?>
+                    <option value='1'>Shown</option>
+                    <option value='0' selected='selected'>Hidden</option>
+                <?php endif; ?>
+            </select>
 
-                echo '</select>';
-                echo '<label>Type: </label><select type="text" class="form-control" id="type" name="type">';
-                for ($i = 0; $i < count($TYPE); $i++) {
-                    echo "<option value='" . $i . "'";
-                    if ($i == $project['type'])
-                        echo "selected='selected'";
-                    echo ">" . $TYPE[$i] . "</option>";
-                }
-                echo "</select>";
-                
-                echo '<div class="form-group" id="summaryGroup">';
-                echo '<label>Summary: </label><textarea class="form-control" id="summary"  name="summary" rows="10">' . $project['summary'] . '</textarea>';
-                echo '</div>';
-                echo '<div class="form-group" id="resultsGroup">';
-                echo '<label>Results: </label><textarea class="form-control" id="results"  name="results" rows="10">' . $project['results'] . '</textarea>';
-                echo '</div>';
-                echo '<label>Link: </label><input type="text" class="form-control" id="link" name="link" value="' . $project['link'] . '">';
-
-
-                echo '<label>Contact: </label><select type="text" class="form-control" id="conid" name="conid">';
-                $contacts = $map->load_contacts();
-                for ($i = 0; $i < count($contacts); $i++) {
-                    echo "<option value='" . $contacts[$i]['conid'] ."'";
-                    if ($contacts[$i]['conid'] == $project['conid'])
-                        echo "selected='selected'";
-                    echo ">" . $contacts[$i]['name'] . "</option>";
-                }
-                echo "</select>";
-                echo '<div class="form-group" id="fundedByGroup">';
-                echo '<label>Funded by: </label><input type="text" class="form-control" id="fundedBy" name="fundedBy" value="' . $project['fundedBy'] . '">';
-                echo '</div>';
-                echo '<div class="form-group" id="pictureGroup">';
-
-                if (!empty($project['pic'])) {      //There is already a picture associated with this project
-                    echo '<a class="btn btn-primary" target="_blank" href="' . $project['pic'] . '">View Picture</a>';
-                    echo '<a class="btn btn-primary" href="delete_picture.php?pid=' . $pid . '">Delete Picture</a>';
-                }
-                echo '<label>Picture upload: </label><input type="file" class="form-control-file" id="pic" name="pic">';
-
-                echo '</div>';
-                echo '<div class="col-md-12"><img id="upload-preview" src="#" style="display:none; max-width:100%; max-height:100%;"></div>';
-                //echo '<label>Picture: </label><input type="text" class="form-control" id="pic" name="pic" value="' . $project['pic'] . '">';
-                echo '<label>Keywords: </label><input type="text" class="form-control" id="keywords" name="keywords" value="' . $project['keywords'] . '">';
-                echo '<label>Visibility: </label><select type="text" class="form-control" id="visible" name="visible">';
-                if ($project['visible'] == 1) {
-                    echo "<option value='1' selected='selected'>Shown</option>";
-                    echo "<option value='0'>Hidden</option>";
-                } else {
-                    echo "<option value='1'>Shown</option>";
-                    echo "<option value='0' selected='selected'>Hidden</option>";
-                }
-                echo "</select>";
-
-
-                // If we're editing a project then set the position variable for javascript to display the position on the map
-                if ($pid != -1)
-                    echo '<script>position = new google.maps.LatLng(' . $project['lat'] . ', ' . $project['lng'] . ');</script>';
-            ?>
+            <?php if ($pid != -1): ?>
+                <script>position = new google.maps.LatLng(<?php echo $project['lat']; ?>, <?php echo $project['lng']; ?>);</script>
+            <?php endif; ?>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <?php
-                echo '<button type="button" class="btn btn-primary" onclick="submitEditProject(' . $pid . ')" >Save changes</button>';
-            ?>
+            <button type="button" class="btn btn-primary" onclick=submitEditProject(<?php echo $pid; ?>)>Save changes</button>
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

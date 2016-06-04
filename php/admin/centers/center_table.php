@@ -40,24 +40,28 @@
 
 				$centers = $map -> load_centers();
 
-				for ($i = 0; $i < count($centers); $i++) {
-					echo "<tr>";
-					if ($map->center_referred_to($centers[$i]['cid'])) {
-						echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $centers[$i]['cid'] . "' disabled='disabled' data-toggle='tooltip' title='Unable to delete this center since a project refers to it'></td>";
-					} else {
-						echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $centers[$i]['cid'] . "'></td>";
-					}
-					
-					$centers[$i]['name'] = strlen($centers[$i]['name']) > 40 ? substr($centers[$i]['name'],0,40)."..." : $centers[$i]['name'];
-					echo "<td class='clickable col-xs-4' onclick=editCenter(" . $centers[$i]['cid'] . ")> " . $centers[$i]['name'] . " </td>";
-					echo "<td class='clickable col-xs-4' onclick=editCenter(" . $centers[$i]['cid'] . ")> " . $centers[$i]['acronym'] . " </td>";
-					echo "<td class='clickable col-xs-3' onclick=editCenter(" . $centers[$i]['cid'] . ") style='color: " . $centers[$i]['color'] . "'> " . $centers[$i]['color'] . " </td>";
-					echo "</tr>";
-				}
 			?>
+
+			<?php for ($i = 0; $i < count($centers); $i++): ?>
+				<tr>
+					<?php if ($map->center_referred_to($centers[$i]['cid'])): ?>
+						<td class='col-xs-1'>
+							<input type='checkbox' class='delete' disabled='disabled' data-toggle='tooltip' title='Unable to delete this center since a project refers to it' id=<?php echo "'". $centers[$i]['cid'] . "'"; ?>>
+						</td>
+					<?php else: ?>
+						<td class='col-xs-1'>
+							<input type='checkbox' class='delete' id=<?php echo "'". $centers[$i]['cid'] . "'"; ?>>
+						</td>
+					<?php endif; ?>
+					
+					<td class='clickable col-xs-4' onclick=editCenter(<?php echo $centers[$i]['cid']; ?>)><?php echo strlen($centers[$i]['name']) > 40 ? substr($centers[$i]['name'],0,40)."..." : $centers[$i]['name']; ?></td>
+					<td class='clickable col-xs-4' onclick=editCenter(<?php echo $centers[$i]['cid']; ?>)><?php echo $centers[$i]['acronym']; ?></td>
+					<td class='clickable col-xs-3' onclick=editCenter(<?php echo $centers[$i]['cid']; ?>) style=<?php echo '"color: ' . $centers[$i]['color'] . ';"'; ?>><?php echo $centers[$i]['color']; ?></td>
+				</tr>
+			<?php endfor; ?>
 		</tbody>
 	</table>
 </div>
 <div class="span7 text-center">
-	<button type="button" class="btn btn-primary" onclick="editCenter(-1)">Add a center</button>
+	<button type="button" class="btn btn-primary" onclick=editCenter(-1)>Add a center</button>
 </div>

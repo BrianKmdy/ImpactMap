@@ -330,9 +330,6 @@ function showProjects(projects) {
 	$("#projectsVisible").html('<a class="navbar-brand" href="#" >' + markers.length + ' ' + projectWord + ' shown</a>');
 }
 
-
-var contentString = "HELLO";
-
 function startLB() {    // start light box on click 
 	var lbBG = document.getElementById('lbBackground');
 	var lbFG = document.getElementById('lb');

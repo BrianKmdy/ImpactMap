@@ -828,7 +828,7 @@ class Map {
     * Search the Projects table for any projects whose stemmedSearchText column matches the give search text
     */
     public function search($searchPhrase) {
-        $sql = "SELECT pid, lat, lng, title FROM Projects WHERE MATCH (stemmedSearchText) AGAINST (:searchPhrase IN BOOLEAN MODE) AND visible = TRUE LIMIT 10";
+        $sql = "SELECT pid, lat, lng, title, cid, type, address FROM Projects WHERE MATCH (stemmedSearchText) AGAINST (:searchPhrase IN BOOLEAN MODE) AND visible = TRUE LIMIT 10";
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt -> bindParam(":searchPhrase", $searchPhrase, PDO::PARAM_STR);
@@ -846,8 +846,8 @@ class Map {
     *
     */
     public function generate_prefetch() {
-      $sql = "SELECT title, buildingName, address, zip, name
-              FROM (SELECT title, buildingName, address, zip, name, visible FROM Projects LEFT JOIN Contacts ON Projects.conid = Contacts.conid) p 
+      $sql = "SELECT title, buildingName, address, zip, contactName, centerName
+              FROM (SELECT title, buildingName, address, zip, visible, Contacts.name AS contactName, Centers.name AS centerName FROM Projects LEFT JOIN Contacts ON Projects.conid = Contacts.conid LEFT JOIN Centers ON Projects.cid = Centers.cid) p 
               WHERE p.visible = TRUE";
       try {
           $stmt = $this->_db->prepare($sql);

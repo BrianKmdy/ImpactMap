@@ -28,20 +28,22 @@
             <h4 class="modal-title">View user</h4>
         </div>
         <div class="modal-body">
-            <?php
-                echo '<label>First: </label><input type="text" class="form-control" disabled="disabled" id="firstName" name="firstName" value="' . $user['firstName'] . '">';
-                echo '<label>Last: </label><input type="text" class="form-control" disabled="disabled" id="lastName" name="lastName" value="' . $user['lastName'] . '">';
-                echo '<label>Email: </label><input type="text" class="form-control" disabled="disabled" id="email" name="email" value="' . $user['email'] . '">';
-                echo '<label>Phone: </label><input type="text" class="form-control" disabled="disabled" id="phone" name="phone" value="' . $user['phone'] . '">';
-                echo '<br>';
-                echo '<div class="span7 text-center">';
-                if ($user['authenticated'] == TRUE) {
-                    echo '<button type="button" class="btn btn-warning" onclick="warnPromotion(' . $uid . ')">Promote to admin</button>';
-                } else {
-                    echo '<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="authenticateUser(' . $uid . ')">Authenticate user</button>';
-                }
-                echo '</div>';
-            ?>
+            <label>First: </label>
+            <input type="text" class="form-control" disabled="disabled" id="firstName" name="firstName" value=<?php echo '"' . $user['firstName'] . '"'; ?>>
+            <label>Last: </label>
+            <input type="text" class="form-control" disabled="disabled" id="lastName" name="lastName" value=<?php echo '"' . $user['lastName'] . '"'; ?>>
+            <label>Email: </label>
+            <input type="text" class="form-control" disabled="disabled" id="email" name="email" value=<?php echo '"' . $user['email'] . '"'; ?>>
+            <label>Phone: </label>
+            <input type="text" class="form-control" disabled="disabled" id="phone" name="phone" value=<?php echo '"' . $user['phone'] . '"'; ?>>
+            <br>
+            <div class="span7 text-center">
+            <?php if ($user['authenticated'] == TRUE): ?>
+                <button type="button" class="btn btn-warning" onclick=warnPromotion(<?php echo $uid; ?>)>Promote to admin</button>
+            <?php else: ?>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick=authenticateUser(<?php echo $uid; ?>)>Authenticate user</button>
+            <?php endif; ?>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

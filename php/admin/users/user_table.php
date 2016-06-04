@@ -22,7 +22,7 @@
 				<th class="col-xs-1">Verified</th>
 				<th class="col-xs-2">First</th>
 				<th class="col-xs-2">Last</th>
-				<th class="col-xs-3">Email</th>
+				<th class="col-a-3">Email</th>
 				<th class="col-xs-3">Phone</th>
 			</tr>
 		</thead>
@@ -38,27 +38,23 @@
 				require_once "../../common/class.map.php";
 
 				$map = new Map();
-
 				$users = $map -> load_users();
-
-				for ($i = 0; $i < count($users); $i++) {
-					if ($users[$i]['uid'] != $_SESSION['uid']) {
-						echo "<tr>";
-						echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $users[$i]['uid'] . "'></td>";	
-						echo "<td class='clickable col-xs-1' onclick=editUser(" . $users[$i]['uid'] . ")><span aria-hidden='true' ";
-						if ($users[$i]['authenticated'] == TRUE)
-							echo "class='glyphicon glyphicon-ok auth'";
-						else
-							echo "class='glyphicon glyphicon-remove notauth'";
-						echo "></span></td>";		
-						echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['firstName'] . " </td>";
-						echo "<td class='col-xs-2 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['lastName'] . " </td>";
-						echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['email'] . " </td>";
-						echo "<td class='col-xs-3 clickable' onclick=editUser(" . $users[$i]['uid'] . ")> " . $users[$i]['phone'] . "&nbsp; </td>";
-						echo "</tr>";
-					}
-				}
 			?>
+
+			<?php for ($i = 0; $i < count($users); $i++): ?>
+				<?php if ($users[$i]['uid'] != $_SESSION['uid']): ?>
+					<tr>
+					<td class='col-xs-1'><input type='checkbox' class='delete' id=<?php echo "'" . $users[$i]['uid'] . "'"; ?>></td>
+					<td class='clickable col-xs-1' onclick=editUser(<?php echo $users[$i]['uid']; ?>)>
+						<span aria-hidden='true' <?php if ($users[$i]['authenticated'] == TRUE) echo "class='glyphicon glyphicon-ok auth'"; else echo "class='glyphicon glyphicon-remove notauth'"; ?>></span>
+					</td>
+					<td class='col-xs-2 clickable' onclick=editUser(<?php echo $users[$i]['uid']; ?>)><?php echo $users[$i]['firstName']; ?></td>
+					<td class='col-xs-2 clickable' onclick=editUser(<?php echo $users[$i]['uid']; ?>)><?php echo $users[$i]['lastName']; ?></td>
+					<td class='col-xs-3 clickable' onclick=editUser(<?php echo $users[$i]['uid']; ?>)><?php echo $users[$i]['email']; ?></td>
+					<td class='col-xs-3 clickable' onclick=editUser(<?php echo $users[$i]['uid']; ?>)><?php echo $users[$i]['phone'] . "&nbsp;"; ?></td>
+					</tr>
+				<?php endif; ?>
+			<?php endfor; ?>
 		</tbody>
 	</table>
 </div>

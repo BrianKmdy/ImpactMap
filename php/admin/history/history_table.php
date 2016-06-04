@@ -50,26 +50,21 @@
 				$filters['timestamp'] = $_POST['timestamp'];
 
 				$history = $map -> load_history_full($filters);
-
-				for ($i = 0; $i < count($history); $i++) {
-					echo "<tr>";
-					echo "<td class='col-xs-1'><input type='checkbox' class='delete' id='" . $history[$i]['hid'] . "'></td>";
-					echo "<td class='col-xs-1 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['firstName'] . " " . substr($history[$i]['lastName'], 0, 1) . "</td>";
-
-					$history[$i]['title'] = strlen($history[$i]['title']) > 25 ? substr($history[$i]['title'],0,25)."..." : $history[$i]['title'];
-					echo "<td class='col-xs-2 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['title'] . " </td>";
-
-					echo "<td class='col-xs-1 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['acronym'] . " </td>";
-
-					echo "<td class='col-xs-2 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $STATUS[$history[$i]['status']] . " </td>";
-
-					echo "<td class='col-xs-2 clickable text-nowrap' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['startDate'] . " </td>";
-
-					$$history[$i]['summary'] = strlen($history[$i]['summary']) > 150 ? substr($history[$i]['summary'],0,150)."..." : $history[$i]['summary'];
-					echo "<td class='col-xs-3 clickable' onclick=viewHistory(" . $history[$i]['hid'] . ")> " . $history[$i]['summary'] . " </td>";
-					echo "</tr>";
-				}
 			?>
+
+			<?php for ($i = 0; $i < count($history); $i++): ?>
+				<tr>
+				<td class='col-xs-1'>
+					<input type='checkbox' class='delete' id=<?php echo "'" . $history[$i]['hid'] . "'"; ?>>
+				</td>
+				<td class='col-xs-1 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $history[$i]['firstName'] . " " . substr($history[$i]['lastName'], 0, 1); ?></td>
+				<td class='col-xs-2 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo strlen($history[$i]['title']) > 25 ? substr($history[$i]['title'],0,25)."..." : $history[$i]['title']; ?></td>
+				<td class='col-xs-1 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $history[$i]['acronym']; ?></td>
+				<td class='col-xs-2 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $STATUS[$history[$i]['status']]; ?></td>
+				<td class='col-xs-2 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo $history[$i]['startDate']; ?></td>
+				<td class='col-xs-3 clickable' onclick=viewHistory(<?php echo $history[$i]['hid']; ?>)><?php echo strlen($history[$i]['summary']) > 150 ? substr($history[$i]['summary'],0,150)."..." : $history[$i]['summary']; ?></td>
+				</tr>
+			<?php endfor; ?>
 		</tbody>
 	</table>
 </div>

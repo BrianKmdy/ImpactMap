@@ -34,7 +34,10 @@ function initMap(draggable) {
     projectPickerMap = new google.maps.Map($("#projectPickerMap").get(0), {
         center: position,
         zoom: 8,
-        disableDefaultUI: true
+        navigationControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        scrollwheel: false
     });
 
     marker = new google.maps.Marker({
@@ -304,7 +307,7 @@ function submitEditProject(pid) {
 
     // When a user submits a project certain fields are combined and then "stemmed", meaning the words are reduced to their roots (i.e. running -> run), and these are then stored as stemmedSearchText to be searched later
     var stemmer = new Snowball("english");
-    var searchWords = ($("#title").val() + " " +  $("#buildingName").val() + " " + $("#address").val() + " " + $("#zip").val() + " " + $("#conid option:selected").text() + " " + $("#keywords").val()).split(/[,. ;\-:\\\/?+!]/);
+    var searchWords = ($("#title").val() + " " +  $("#buildingName").val() + " " + $("#address").val() + " " + $("#zip").val() + " " + $("#conid option:selected").text() + " " + $("#cid option:selected").text().split(/[ ()]/) + " " + $("#keywords").val()).split(/[,. ;\-:\\\/?+!]/);
     searchWords.forEach(function (word, i, words) {
         stemmer.setCurrent(word);
         stemmer.stem();
